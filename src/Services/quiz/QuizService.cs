@@ -2,11 +2,83 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using ganbare.src.Entity;
+using ganbare.src.Repository;
+using ganbare.src.Utils;
+using static ganbare.src.DTO.QuizDTO;
 
 namespace ganbare.src.Services.quiz
 {
     public class QuizService : IQuizService
     {
-        
+        protected readonly QuizRepository _quizRepo;
+        protected readonly IMapper _mapper;
+
+         public QuizService(QuizRepository quizRepo, IMapper mapper)
+        {
+            _quizRepo = quizRepo;
+            _mapper = mapper;
+        }
+        public async Task<QuizReadDto> CreateOneAsync(QuizCreateDto createDto)
+        {
+            var quiz = _mapper.Map<QuizCreateDto, Quiz>(createDto);
+
+            var quizCreated = await _quizRepo.CreateOneAsync(quiz);
+
+            return _mapper.Map<Quiz, QuizReadDto>(quizCreated);
+        }
+
+        public async Task<List<QuizReadDto>> GetAllAsync()
+        {
+            var quizList = await _quizRepo.GetAllAsync();
+            return _mapper.Map<List<Quiz>, List<QuizReadDto>>(quizList);
+        }
+
+        public async Task<QuizReadDto> GetByIdAsync(Guid quizId)
+        {
+            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
+            if (foundQuiz == null)
+            {
+                throw CustomException.NotFound($"Quiz with {quizId} cannot be found! ");
+            }
+            return _mapper.Map<Quiz, QuizReadDto>(foundQuiz);
+        }
+
+        public async Task<bool> DeleteOneAsync(Guid quizId)
+        {
+            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
+            if (foundQuiz == null)
+            {
+                throw CustomException.NotFound(
+                    $"Quiz with ID {quizId} is not found."
+                );
+            }
+            try
+            {
+                bool isDeleted = await _quizRepo.DeleteOneAsync(foundQuiz);
+                return isDeleted;
+            }
+            catch (Exception ex)
+            {
+                throw CustomException.InternalError(
+                    $"An error occurred while deleting the quiz with ID {quizId}: {ex.Message}"
+                );
+            }
+        }
+
+        public async Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto)
+        {
+            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
+
+            if (foundQuiz == null)
+            {
+                throw CustomException.NotFound(
+                    $"Quiz with ID {quizId} cannot be found for updating."
+                );
+            }
+            _mapper.Map(updateDto, foundQuiz);
+            return await _quizRepo.UpdateOneAsync(foundQuiz);
+        }
     }
 }

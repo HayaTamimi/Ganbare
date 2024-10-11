@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ganbare.src.Entity;
 
 namespace ganbare.src.DTO
 {
@@ -29,10 +30,15 @@ namespace ganbare.src.DTO
 
             [DataType(DataType.Password), Required]
             public string Password { get; set; }
+
+            public Role Role { get; set; }
+
         }
 
         public class UserReadDto
         {
+
+             [Key]
             public Guid UserId { get; set; }
             public string Username { get; set; }
 
@@ -42,9 +48,11 @@ namespace ganbare.src.DTO
 
         public class UserUpdateDto
         {
-            public string Username { get; set; }
-            public string Email { get; set; }
-            public string Password { get; set; }
+            [StringLength(14, MinimumLength = 3, 
+            ErrorMessage = "Username should be less than 15 letters & more than 2!")]
+            public string? Username { get; set; }
+            public string? Email { get; set; }
+            public string? Password { get; set; }
             public byte[]? Salt { get; set; }
         }
     }

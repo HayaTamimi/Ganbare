@@ -34,7 +34,7 @@ namespace ganbare.src.Services.user
             var foundUser = await _userRepo.GetByIdAsync(id);
             if (foundUser == null)
             {
-                throw CustomException.NotFound($"user with {id} cannot be found! ");
+                throw CustomException.NotFound($"There is no user with ID {id}.");
             }
             return _mapper.Map<User, UserReadDto>(foundUser);
         }
@@ -44,7 +44,7 @@ namespace ganbare.src.Services.user
             var foundUser = await _userRepo.GetByIdAsync(id);
             if (foundUser == null)
             {
-                throw CustomException.NotFound($"user with ID {id} cannot be found for deletion.");
+                throw CustomException.NotFound($"There is no user with ID {id}.");
             }
             try
             {
@@ -65,19 +65,16 @@ namespace ganbare.src.Services.user
 
             if (foundUser == null)
             {
-                throw CustomException.NotFound($"user with ID {id} cannot be found for updating.");
+                throw CustomException.NotFound($"There is no user with the ID {id} to update.");
             }
 
             _mapper.Map(updateDto, foundUser);
             return await _userRepo.UpdateOneAsync(foundUser);
         }
 
-        //  public Task<string> SignInAsync(UserCreateDto createDto)
-        //  {throw new NotImplementedException();}
-
         public async Task<UserReadDto> CreateOneAsync(UserCreateDto createDto)
         {
-            PasswordUtils.Password(createDto.Password, out string hashedPassword, out byte[] salt);
+            Password.HashPassword(createDto.Password, out string hashedPassword, out byte[] salt);
 
             var user = _mapper.Map<UserCreateDto, User>(createDto);
             user.Password = hashedPassword;
@@ -97,7 +94,7 @@ namespace ganbare.src.Services.user
             var foundUser = userList.FirstOrDefault(u => u.Email == createDto.Email);
             if (foundUser != null)
             {
-                isMatched = PasswordUtils.VerifyPassword(
+                isMatched = Password.VerifyPassword(
                     createDto.Password,
                     foundUser.Salt,
                     foundUser.Password
@@ -105,12 +102,12 @@ namespace ganbare.src.Services.user
 
                 if (isMatched)
                 {
-                    var tokenUtil = new TokenUtils(_config);
-                    return tokenUtil.GnerateToken(foundUser);
+                    var token = new Token(_config);
+                    return token.GnerateToken(foundUser);
                 }
                 // return "Unauthorized";
                 throw CustomException.UnAuthorized(
-                    $"Password for user with email {foundUser.Email} does not match !"
+                    $"Password for user with email {foundUser.Email} does not match!"
                 );
             }
             else

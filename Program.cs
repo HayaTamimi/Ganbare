@@ -1,10 +1,13 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using ganbare.src.Database;
+using ganbare.src.Entity;
 using ganbare.src.Middlewares;
 using ganbare.src.Repository;
+using ganbare.src.Services.leaderboard;
 using ganbare.src.Services.question;
 using ganbare.src.Services.quiz;
+using ganbare.src.Services.result;
 using ganbare.src.Services.user;
 using ganbare.src.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -21,6 +24,7 @@ builder.Configuration.GetConnectionString("Local")
 
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
+dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<Level>();
 
 
@@ -30,9 +34,13 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.EnableSensitiveDataLogging();
 });
 
+builder.Services.AddScoped<ILeaderboardService, LeaderboardService>().AddScoped<LeaderboardRepository, LeaderboardRepository>();
+
 builder.Services.AddScoped<IQuestionService, QuestionService>().AddScoped<QuestionRepository, QuestionRepository>();
 
 builder.Services.AddScoped<IQuizService, QuizService>().AddScoped<QuizRepository, QuizRepository>();
+
+builder.Services.AddScoped<IResultService, ResultService>().AddScoped<ResultRepository, ResultRepository>();
 
 builder.Services.AddScoped<IUserService, UserService>().AddScoped<UserRepository, UserRepository>();
 
