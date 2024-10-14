@@ -46,6 +46,7 @@ namespace ganbare.src.Utils
             // .ForAllMembers(opts =>
             //    opts.Condition((src, dest, srcProperty) => srcProperty != null)  );
 
+
             CreateMap<Result, ResultReadDto>();
             CreateMap<ResultCreateDto, Result>();
             /*CreateMap<ResultUpdateDto, Result>()

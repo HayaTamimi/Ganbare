@@ -9,7 +9,10 @@ namespace ganbare.src.Entity
     public class Result
     {
         public Guid ResultId { get; set; }
-        public int TotalScore { get; set; } = 0; // to display in the leaderbaord
+
+        // TotalScore caculated depending on the level 
+        // for exampel
+        public double TotalScore { get; set; } = 0; // to display in the leaderbaord
 
         //change the time and type of data // 100%
         public float Speed { get; set; } // 0-1 

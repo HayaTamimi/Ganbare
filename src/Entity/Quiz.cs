@@ -12,8 +12,8 @@ namespace ganbare.src.Entity
     {
         public Guid QuizId { get; set; }
 
+        // if above 80% then pass if not then fail (80% = 8 out of 10 questions)
 
-        // QuizScore caculated depending on the level
         public int QuizScore { get; set; } = 0; // this is the score by default
 
 
@@ -23,10 +23,6 @@ namespace ganbare.src.Entity
         // to caculate the time taken (better thab the above idea)
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-
-
-        // if above 80% then pass if not then fail (80% = 8 out of 10 questions)
-        public Boolean Grade { get; set; } // true if pass, false if not 
 
         public QuizLevel Level { get; set; }
 

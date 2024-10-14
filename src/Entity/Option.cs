@@ -13,6 +13,7 @@ namespace ganbare.src.Entity
 
         // calculate the score based on the number of correct answers.
         public bool IsCorrect { get; set; } 
+
         public Guid? QuizId { get; set; } 
     }
 }

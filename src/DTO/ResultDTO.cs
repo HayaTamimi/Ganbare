@@ -10,9 +10,9 @@ namespace ganbare.src.DTO
     {
         public class ResultCreateDto
         {
-            public string? TotalScore { get; set; }
+            public double? TotalScore { get; set; }
 
-            public string? Speed { get; set; }
+            public double? Speed { get; set; }
 
             public Guid? UserId { get; set; }
 
@@ -20,9 +20,9 @@ namespace ganbare.src.DTO
         public class ResultReadDto
         {
             public Guid ResultId { get; set; }
-            public string TotalScore { get; set; }
+            public double TotalScore { get; set; }
 
-            public string Speed { get; set; }
+            public double Speed { get; set; }
 
             public Guid? UserId { get; set; }
             //public Guid? LeaderboardId { get; set; }
