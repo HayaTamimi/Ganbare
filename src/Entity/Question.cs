@@ -9,32 +9,35 @@ namespace ganbare.src.Entity
 {
     public class Question // 10 Questions in each Quiz
     {
-        [Key]
         public Guid QuestionId { get; set; }
 
         [Required, StringLength(50, MinimumLength = 5,
         ErrorMessage = "Question must be between 5 and 50 characters.")]
-        public string JpQuestion { get; set; }
+        public string QuestionText { get; set; }
+
+        // [Required]
+        //public string Options { get; set; } // change it to array
 
         [Required]
-        public string Options { get; set; }
+        public string Answer { get; set; }
 
         [Required]
-        public string Anwser { get; set; }
+        public QuestionLevel Jlptlevel { get; set; }
 
-        [Required]
-        public Level Jlptlevel { get; set; }
+        public List<Option> Options { get; set; }
 
         public Guid? QuizId { get; set; }
 
     }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Level
+
+    public enum QuestionLevel
     {
-        N5,
-        N4,
-        N3,
-        N2,
-        N1
+        One, // easiest level
+        Two,
+        Three,
+        Four,
+        Five // hardest level
     }
 }

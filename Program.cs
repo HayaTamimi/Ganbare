@@ -25,7 +25,9 @@ builder.Configuration.GetConnectionString("Local")
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
 dataSourceBuilder.MapEnum<Role>();
-dataSourceBuilder.MapEnum<Level>();
+dataSourceBuilder.MapEnum<QuestionLevel>();
+dataSourceBuilder.MapEnum<QuizLevel>(); 
+
 
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
@@ -35,6 +37,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 });
 
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>().AddScoped<LeaderboardRepository, LeaderboardRepository>();
+
+builder.Services.AddScoped<IUserService, OptionService>().AddScoped<OptionRepository, OptionRepository>();
 
 builder.Services.AddScoped<IQuestionService, QuestionService>().AddScoped<QuestionRepository, QuestionRepository>();
 

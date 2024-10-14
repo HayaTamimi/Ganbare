@@ -45,6 +45,9 @@ namespace ganbare.src.Services.quiz
             return _mapper.Map<Quiz, QuizReadDto>(foundQuiz);
         }
 
+
+
+/*
         public async Task<bool> DeleteOneAsync(Guid quizId)
         {
             var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
@@ -80,5 +83,6 @@ namespace ganbare.src.Services.quiz
             _mapper.Map(updateDto, foundQuiz);
             return await _quizRepo.UpdateOneAsync(foundQuiz);
         }
+        */
     }
 }

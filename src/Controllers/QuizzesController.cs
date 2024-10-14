@@ -42,6 +42,7 @@ namespace ganbare.src.Controllers
             return Ok(quiz);
         }
 
+/*
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
@@ -52,7 +53,7 @@ namespace ganbare.src.Controllers
                 return NotFound();
             }
             return Ok();
-        }
+        
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
@@ -65,6 +66,6 @@ namespace ganbare.src.Controllers
             }
             return NoContent();
         }
-
+*/
     }
 }

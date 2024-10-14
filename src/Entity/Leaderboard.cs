@@ -8,9 +8,8 @@ namespace ganbare.src.Entity
 {
     public class Leaderboard
     {
-        [Key]
         public Guid LeaderboardId { get; set; }
-        public List<Result>? Results { get; set; }//= new List<Result>();
+        public List<Result> Results { get; set; } // 
         
     }
 }

@@ -14,11 +14,13 @@ namespace ganbare.src.DTO
         {
             [Required, StringLength(50, MinimumLength = 5,
    ErrorMessage = "Question must be between 5 and 50 characters.")]
-            public string JpQuestion { get; set; }
-            public string Options { get; set; }
+            public string QuestionText { get; set; }
 
-            public string Anwser { get; set; }
-            public Level Jlptlevel { get; set; }
+            [Required]
+            public string Answer { get; set; }
+            public QuestionLevel Jlptlevel { get; set; }
+
+            public List<Option> Options { get; set; }
 
             public Guid? QuizId { get; set; }
 
@@ -26,18 +28,18 @@ namespace ganbare.src.DTO
 
         public class QuestionReadDto
         {
-            [Key]
             public Guid QuestionId { get; set; }
 
-            public string JpQuestion { get; set; }
+            public string QuestionText { get; set; }
 
-            public string Options { get; set; }
+            public string Answer { get; set; }
 
-            public string Anwser { get; set; }
-
-            public Level Jlptlevel { get; set; }
+            public QuestionLevel Jlptlevel { get; set; }
 
             public Guid? QuizID { get; set; }
+
+            public List<Option> Options { get; set; }
+
 
         }
 
@@ -45,11 +47,11 @@ namespace ganbare.src.DTO
         {
             [Required, StringLength(50, MinimumLength = 5,
             ErrorMessage = "Question must be between 5 and 50 characters.")]
-            public string? JpQuestion { get; set; }
+            public string? QuestionText { get; set; }
 
-            public string? Options { get; set; }
+            public string? Answer { get; set; }
 
-            public string? Anwser { get; set; }
+            public List<Option> Options { get; set; }
 
         }
     }

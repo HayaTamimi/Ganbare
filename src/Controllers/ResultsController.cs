@@ -42,6 +42,7 @@ namespace ganbare.src.Controllers
             return Ok(result);
         }
 
+/*
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, ResultUpdateDto updateDto)
@@ -53,7 +54,7 @@ namespace ganbare.src.Controllers
             }
             return Ok();
         }
-
+*/
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)

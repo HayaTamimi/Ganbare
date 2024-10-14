@@ -12,6 +12,9 @@ namespace ganbare.src.Services.result
         Task<List<ResultReadDto>> GetAllAsync();
         Task<ResultReadDto> GetByIdAsync(Guid resultId);
         Task<bool> DeleteOneAsync(Guid resultId);
-        Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto);
+
+
+        
+        //Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto);
     }
 }

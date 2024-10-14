@@ -11,22 +11,20 @@ namespace ganbare.src.DTO
     {
         public class LeaderboardCreateDto
         {
-            public List<Result>? Results { get; set; }
+            public List<Result> Results { get; set; }
 
         }
         public class LeaderboardReadDto
         {
-            [Key]
             public Guid LeaderboardId { get; set; }
 
-            public List<Result>? Results { get; set; }
-
+            public List<Result> Results { get; set; }
 
         }
 
         public class LeaderboardUpdateDto
         {
-            public List<Result>? Results { get; set; }
+            public List<Result> Results { get; set; }
 
         }
     }

@@ -37,8 +37,6 @@ namespace ganbare.src.DTO
 
         public class UserReadDto
         {
-
-             [Key]
             public Guid UserId { get; set; }
             public string Username { get; set; }
 

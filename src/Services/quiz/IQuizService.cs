@@ -14,9 +14,15 @@ namespace ganbare.src.Services.quiz
         //Task<QuizReadDto> CreateOneAsync(Guid userId, Guid questionId, QuizCreateDto createDto);
         Task<List<QuizReadDto>> GetAllAsync();
         Task<QuizReadDto> GetByIdAsync(Guid quizId);
-        Task<bool> DeleteOneAsync(Guid quizId);
-        Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto);
-        //Task<List<QuizReadDto>> GetAllAsyncByLevels(Level level); // To get the quizzes of specific level
+
+
+        // still thinking about it
+        //Task<List<QuizReadDto>> GetAllAsyncByLevels(Level level); // To get the questions of specific level
+
+
+
+        //Task<bool> DeleteOneAsync(Guid quizId);
+        //Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto);
 
     }
 }

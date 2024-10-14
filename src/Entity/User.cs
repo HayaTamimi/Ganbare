@@ -10,7 +10,6 @@ namespace ganbare.src.Entity
 {
     public class User
     {
-        [Key]
         public Guid UserId { get; set; }
 
         [StringLength(14, MinimumLength = 3,
@@ -24,7 +23,9 @@ namespace ganbare.src.Entity
         public string Password { get; set; }
         public byte[]? Salt { get; set; }
         public Role Role { get; set; } = Role.Customer; 
-        public List<Quiz>? Quizzes { get; set; }//= new List<Quiz>();
+
+        // the quiz list can make us do a lot of things
+        public List<Quiz> Quizzes { get; set; } // if it's array it's ok to be without Q
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

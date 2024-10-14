@@ -67,7 +67,7 @@ namespace ganbare.src.Services.result
                 );
             }
         }
-
+/*
         public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)
         {
             var foundResult = await _resultRepo.GetByIdAsync(resultId);
@@ -80,6 +80,6 @@ namespace ganbare.src.Services.result
             }
             _mapper.Map(updateDto, foundResult);
             return await _resultRepo.UpdateOneAsync(foundResult);
-        }
+        }*/
     }
 }

@@ -8,14 +8,13 @@ namespace ganbare.src.Entity
 {
     public class Result
     {
-        [Key]
         public Guid ResultId { get; set; }
-        public int Score { get; set; } // it supposed to be included manually after the user finish the quiz 
+        public int TotalScore { get; set; } = 0; // to display in the leaderbaord
 
-        public string Duration { get; set; } // it supposed to be included manually after the user finish the quiz 
-
+        //change the time and type of data // 100%
+        public float Speed { get; set; } // 0-1 
         public Guid? UserId { get; set; }
-        public Guid? LeaderboardId { get; set; }
+        public Guid LeaderboardId { get; set; } // caculated using score
 
     }
 }
