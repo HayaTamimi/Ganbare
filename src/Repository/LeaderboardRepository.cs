@@ -47,6 +47,6 @@ namespace ganbare.src.Repository
         {
             return await _leaderboard.ToListAsync();
         }        
-     
+    
     }
 }

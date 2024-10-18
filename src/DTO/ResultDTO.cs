@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using ganbare.src.Entity;
 
 namespace ganbare.src.DTO
 {
@@ -13,6 +14,7 @@ namespace ganbare.src.DTO
             public double? TotalScore { get; set; }
 
             public double? Speed { get; set; }
+            public Quiz? Quiz { get; set; } // *NEW* need to add to ERD
 
             public Guid? UserId { get; set; }
 
@@ -20,9 +22,9 @@ namespace ganbare.src.DTO
         public class ResultReadDto
         {
             public Guid ResultId { get; set; }
-            public double TotalScore { get; set; }
+            public double? TotalScore { get; set; }
 
-            public double Speed { get; set; }
+            public double? Speed { get; set; }
 
             public Guid? UserId { get; set; }
             //public Guid? LeaderboardId { get; set; }

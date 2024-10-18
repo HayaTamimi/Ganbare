@@ -6,33 +6,28 @@ using AutoMapper;
 using ganbare.src.Entity;
 using ganbare.src.Repository;
 using ganbare.src.Utils;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using static ganbare.src.DTO.ResultDTO;
 
 namespace ganbare.src.Services.result
 {
-     
     public class ResultService : IResultService
     {
         protected readonly ResultRepository _resultRepo;
         protected readonly IMapper _mapper;
+        protected readonly QuizRepository _quizRepository;
 
-         public ResultService(ResultRepository resultRepo, IMapper mapper)
+        public ResultService(ResultRepository resultRepo, IMapper mapper, QuizRepository quizRepo)
         {
             _resultRepo = resultRepo;
             _mapper = mapper;
-        }
-        public async Task<ResultReadDto> CreateOneAsync(ResultCreateDto createDto)
-        {
-            var result = _mapper.Map<ResultCreateDto, Result>(createDto);
+            _quizRepository = quizRepo;
 
-            var resultCreated = await _resultRepo.CreateOneAsync(result);
-
-            return _mapper.Map<Result, ResultReadDto>(resultCreated);
         }
 
-        public async Task<List<ResultReadDto>> GetAllAsync()
+        public async Task<List<ResultReadDto>> GetAllAsync(Logic logic)
         {
-            var resultList = await _resultRepo.GetAllAsync();
+            var resultList = await _resultRepo.GetAllAsync(logic);
             return _mapper.Map<List<Result>, List<ResultReadDto>>(resultList);
         }
 
@@ -67,19 +62,39 @@ namespace ganbare.src.Services.result
                 );
             }
         }
-/*
-        public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)
-        {
-            var foundResult = await _resultRepo.GetByIdAsync(resultId);
 
-            if (foundResult == null)
-            {
-                throw CustomException.NotFound(
-                    $"Result with ID {resultId} cannot be found for updating."
-                );
-            }
-            _mapper.Map(updateDto, foundResult);
-            return await _resultRepo.UpdateOneAsync(foundResult);
-        }*/
+        public async Task<ResultReadDto> CreateOneAsync(ResultCreateDto createDto)
+        {
+            var result = _mapper.Map<ResultCreateDto, Result>(createDto);
+
+            var resultCreated = await _resultRepo.CreateOneAsync(result);
+
+            return _mapper.Map<Result, ResultReadDto>(resultCreated);
+        }
+
+
+
+        public async Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic)
+        {
+
+
+            var results = await _resultRepo.GetAllAsyncScores();
+            var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
+            return resultMap;
+        }
+        /*
+                                public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)
+                                {
+                                    var foundResult = await _resultRepo.GetByIdAsync(resultId);
+
+                                    if (foundResult == null)
+                                    {
+                                        throw CustomException.NotFound(
+                                            $"Result with ID {resultId} cannot be found for updating."
+                                        );
+                                    }
+                                    _mapper.Map(updateDto, foundResult);
+                                    return await _resultRepo.UpdateOneAsync(foundResult);
+                                }*/
     }
 }

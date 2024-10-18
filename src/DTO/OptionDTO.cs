@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,28 +10,36 @@ namespace ganbare.src.DTO
     {
         public class OptionCreateDto
         {
-        public string Choice { get; set; } 
 
-        public bool IsCorrect { get; set; } 
+            [Required]
+            [Range(4, 4)]
+            public string Choice { get; set; }
 
-        //public Guid? QuizId { get; set; } 
+            [Required]
+            public bool IsCorrect { get; set; }
+
+            //public Guid? QuesitionId { get; set; } 
 
         }
 
         public class OptionReadDto
         {
 
-        public Guid OptionId { get; set; }
-        public string Choice { get; set; } 
-        public bool IsCorrect { get; set; } 
-        public Guid? QuizId { get; set; } 
+            public Guid OptionId { get; set; }
+            public string Choice { get; set; }
+            public bool IsCorrect { get; set; }
+            public Guid? QuesitionId { get; set; }
 
         }
 
         public class OptionUpdateDto
         {
-        public string Choice { get; set; } 
-        public bool IsCorrect { get; set; } 
+            [Required]
+            [Range(4, 4)]
+            public string Choice { get; set; }
+
+            [Required]
+            public bool IsCorrect { get; set; }
 
         }
     }

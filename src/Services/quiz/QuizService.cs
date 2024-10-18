@@ -13,12 +13,15 @@ namespace ganbare.src.Services.quiz
     public class QuizService : IQuizService
     {
         protected readonly QuizRepository _quizRepo;
+                protected readonly ResultRepository _resultRepo;
+
         protected readonly IMapper _mapper;
 
-         public QuizService(QuizRepository quizRepo, IMapper mapper)
+        public QuizService(QuizRepository quizRepo, IMapper mapper, ResultRepository resultRepo)
         {
             _quizRepo = quizRepo;
             _mapper = mapper;
+            _resultRepo = resultRepo;
         }
         public async Task<QuizReadDto> CreateOneAsync(QuizCreateDto createDto)
         {
@@ -29,9 +32,9 @@ namespace ganbare.src.Services.quiz
             return _mapper.Map<Quiz, QuizReadDto>(quizCreated);
         }
 
-        public async Task<List<QuizReadDto>> GetAllAsync()
+        public async Task<List<QuizReadDto>> GetAllAsync(Logic logic)
         {
-            var quizList = await _quizRepo.GetAllAsync();
+            var quizList = await _quizRepo.GetAllAsync(logic);
             return _mapper.Map<List<Quiz>, List<QuizReadDto>>(quizList);
         }
 
@@ -46,43 +49,42 @@ namespace ganbare.src.Services.quiz
         }
 
 
+        /*
+                public async Task<bool> DeleteOneAsync(Guid quizId)
+                {
+                    var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
+                    if (foundQuiz == null)
+                    {
+                        throw CustomException.NotFound(
+                            $"Quiz with ID {quizId} is not found."
+                        );
+                    }
+                    try
+                    {
+                        bool isDeleted = await _quizRepo.DeleteOneAsync(foundQuiz);
+                        return isDeleted;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw CustomException.InternalError(
+                            $"An error occurred while deleting the quiz with ID {quizId}: {ex.Message}"
+                        );
+                    }
+                }
 
-/*
-        public async Task<bool> DeleteOneAsync(Guid quizId)
-        {
-            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
-            if (foundQuiz == null)
-            {
-                throw CustomException.NotFound(
-                    $"Quiz with ID {quizId} is not found."
-                );
-            }
-            try
-            {
-                bool isDeleted = await _quizRepo.DeleteOneAsync(foundQuiz);
-                return isDeleted;
-            }
-            catch (Exception ex)
-            {
-                throw CustomException.InternalError(
-                    $"An error occurred while deleting the quiz with ID {quizId}: {ex.Message}"
-                );
-            }
-        }
+                public async Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto)
+                {
+                    var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
 
-        public async Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto)
-        {
-            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
-
-            if (foundQuiz == null)
-            {
-                throw CustomException.NotFound(
-                    $"Quiz with ID {quizId} cannot be found for updating."
-                );
-            }
-            _mapper.Map(updateDto, foundQuiz);
-            return await _quizRepo.UpdateOneAsync(foundQuiz);
-        }
-        */
+                    if (foundQuiz == null)
+                    {
+                        throw CustomException.NotFound(
+                            $"Quiz with ID {quizId} cannot be found for updating."
+                        );
+                    }
+                    _mapper.Map(updateDto, foundQuiz);
+                    return await _quizRepo.UpdateOneAsync(foundQuiz);
+                }
+                */
     }
 }

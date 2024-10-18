@@ -8,16 +8,29 @@ namespace ganbare.src.Entity
 {
     public class Result
     {
+
+        // this is how we collect Book.Price * cartItems.Quantity
         public Guid ResultId { get; set; }
 
         // TotalScore caculated depending on the level 
-        // for exampel
-        public double TotalScore { get; set; } = 0; // to display in the leaderbaord
+
+        //var totalScoreSum = createDto.Results.Sum(r => r.TotalScore);
+        //var userResults = results.Where(r =>
+        //r.TotalScore == totalScoreSum).ToList();
+
+        public double? TotalScore { get; set; } = 0;  //GetAll.Quiz.QuizScore
 
         //change the time and type of data // 100%
-        public float Speed { get; set; } // 0-1 
-        public Guid? UserId { get; set; }
-        public Guid LeaderboardId { get; set; } // caculated using score
+        public TimeSpan? Speed { get; set; } // 0-1 
 
-    }
-}
+        public Guid? UserId { get; set; }
+
+        public Quiz Quiz { get; set; }
+        public Guid QuizId { get; set; }
+
+        public List<Quiz> Quizzes { get; set; }
+
+        public Guid LeaderboardId { get; set; }
+
+    } 
+    } 

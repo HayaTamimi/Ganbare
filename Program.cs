@@ -5,6 +5,7 @@ using ganbare.src.Entity;
 using ganbare.src.Middlewares;
 using ganbare.src.Repository;
 using ganbare.src.Services.leaderboard;
+using ganbare.src.Services.option;
 using ganbare.src.Services.question;
 using ganbare.src.Services.quiz;
 using ganbare.src.Services.result;
@@ -38,7 +39,7 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>().AddScoped<LeaderboardRepository, LeaderboardRepository>();
 
-builder.Services.AddScoped<IUserService, OptionService>().AddScoped<OptionRepository, OptionRepository>();
+builder.Services.AddScoped<IOptionService, OptionService>().AddScoped<OptionRepository, OptionRepository>();
 
 builder.Services.AddScoped<IQuestionService, QuestionService>().AddScoped<QuestionRepository, QuestionRepository>();
 

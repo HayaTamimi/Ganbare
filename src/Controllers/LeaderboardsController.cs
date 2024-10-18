@@ -9,7 +9,6 @@ using static ganbare.src.DTO.LeaderboardDTO;
 
 namespace ganbare.src.Controllers
 {
-
     [ApiController]
     [Route("api/v1/[controller]")]
     public class LeaderboardsController : ControllerBase

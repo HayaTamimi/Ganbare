@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using AutoMapper;
 using ganbare.src.Database;
 using ganbare.src.Entity;
+using ganbare.src.Utils;
 using Microsoft.EntityFrameworkCore;
+
 
 namespace ganbare.src.Repository
 {
@@ -13,15 +13,24 @@ namespace ganbare.src.Repository
         protected DbSet<Result> _result;
         protected DatabaseContext _databaseContext;
 
+
         public ResultRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
-           _result = databaseContext.Set<Result>();
+            _result = databaseContext.Set<Result>();
+        }
+
+        public async Task<Result> AddResultAsync(Result newResult)
+        {
+            await _result.AddAsync(newResult);
+            await _databaseContext.SaveChangesAsync();
+            return newResult;
+
         }
 
         public async Task<Result> CreateOneAsync(Result newResult)
         {
-            
+
             await _result.AddAsync(newResult);
             await _databaseContext.SaveChangesAsync();
             return newResult;
@@ -33,6 +42,7 @@ namespace ganbare.src.Repository
             await _databaseContext.SaveChangesAsync();
             return true;
         }
+
         public async Task<bool> DeleteOneAsync(Result result)
         {
             _result.Remove(result);
@@ -43,9 +53,28 @@ namespace ganbare.src.Repository
         {
             return await _result.FindAsync(id);
         }
-        public async Task<List<Result>> GetAllAsync()
+        public async Task<List<Result>> GetAllAsync(Logic logic)
         {
+            
             return await _result.ToListAsync();
-        }        
+        }
+
+        public async Task<List<Result>> GetAllAsyncScores()
+        {       // to get the order on the leaderboard 
+                // order by total scores
+                // then by speed
+            var userResults = await _result.GroupBy(r => r.UserId)
+            .Select(Group => new
+            {
+                UserId = Group.Key,
+                TotalScore = Group.Sum(result => result.TotalScore),
+                Speed = Group.Quiz.EndTime - Group.Quiz.StartTime
+            })
+                .OrderBy(r => r.TotalScore)
+                .ThenBy(r => r.Speed)
+                .ToListAsync();
+
+            return userResults;
+        }
     }
 }

@@ -15,8 +15,6 @@ namespace ganbare.src.Services.leaderboard
         Task<bool> DeleteOneAsync(Guid leaderboardId);
         Task<bool> UpdateOneAsync(Guid leaderboardId, LeaderboardUpdateDto updateDto);
 
-        // still not sure about it
-        //Task<List<LeaderboardReadDto>> GetAllAsyncScores(User score); 
 
     }
 }

@@ -10,7 +10,6 @@ namespace ganbare.src.Repository
 {
     public class QuestionRepository
     {
-        
         protected DbSet<Question> _question;
         protected DatabaseContext _databaseContext;
 

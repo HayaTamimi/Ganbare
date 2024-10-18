@@ -25,6 +25,7 @@ namespace ganbare.src.Utils
                     opts.Condition((src, dest, srcProperty) => srcProperty != null)
                 );
 
+
             CreateMap<Question, QuestionReadDto>();
             CreateMap<QuestionCreateDto, Question>();
             CreateMap<QuestionUpdateDto, Question>()

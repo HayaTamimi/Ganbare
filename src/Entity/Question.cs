@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace ganbare.src.Entity
 {
-    public class Question // 10 Questions in each Quiz
+    public class Question
     {
         public Guid QuestionId { get; set; }
 
         [Required, StringLength(50, MinimumLength = 5,
         ErrorMessage = "Question must be between 5 and 50 characters.")]
         public string QuestionText { get; set; }
-
-        // [Required]
-        //public string Options { get; set; } // change it to array
 
         [Required]
         public string Answer { get; set; }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using ganbare.src.DTO;
 using ganbare.src.Entity;
 using ganbare.src.Repository;
 using ganbare.src.Utils;
@@ -15,6 +16,7 @@ namespace ganbare.src.Services.leaderboard
         protected readonly LeaderboardRepository _leaderboardRepo;
         protected readonly IMapper _mapper;
 
+
         public LeaderboardService(LeaderboardRepository leaderboardRepo, IMapper mapper)
         {
             _leaderboardRepo = leaderboardRepo;
@@ -22,6 +24,8 @@ namespace ganbare.src.Services.leaderboard
         }
         public async Task<LeaderboardReadDto> CreateOneAsync(LeaderboardCreateDto createDto)
         {
+            var totalScores = createDto.Results.Sum(r => r.TotalScore);
+
             var leaderboard = _mapper.Map<LeaderboardCreateDto, Leaderboard>(createDto);
 
             var leaderboardCreated = await _leaderboardRepo.CreateOneAsync(leaderboard);
@@ -80,5 +84,6 @@ namespace ganbare.src.Services.leaderboard
             _mapper.Map(updateDto, foundLeaderboard);
             return await _leaderboardRepo.UpdateOneAsync(foundLeaderboard);
         }
-    }
+
+}
 }

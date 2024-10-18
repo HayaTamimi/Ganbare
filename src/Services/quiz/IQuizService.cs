@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ganbare.src.Entity;
+using ganbare.src.Utils;
 using static ganbare.src.DTO.QuizDTO;
 
 namespace ganbare.src.Services.quiz
@@ -12,14 +13,14 @@ namespace ganbare.src.Services.quiz
         Task<QuizReadDto> CreateOneAsync(QuizCreateDto createDto);
         //Task<QuizReadDto> CreateOneAsync(Guid userId, QuizCreateDto createDto);
         //Task<QuizReadDto> CreateOneAsync(Guid userId, Guid questionId, QuizCreateDto createDto);
-        Task<List<QuizReadDto>> GetAllAsync();
+        //Task<List<QuizReadDto>> GetAllAsync();
+        Task<List<QuizReadDto>> GetAllAsync(Logic logic);
         Task<QuizReadDto> GetByIdAsync(Guid quizId);
 
+        //Task<List<QuizReadDto>> GetAllAsyncByLevels(); // didn't made logic of it yet
 
-        // still thinking about it
-        //Task<List<QuizReadDto>> GetAllAsyncByLevels(Level level); // To get the questions of specific level
-
-
+        //Task<Quiz> GetPoints(QuizLevel level);
+       // public Task<Result> QuizResults(Guid id);
 
         //Task<bool> DeleteOneAsync(Guid quizId);
         //Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto);

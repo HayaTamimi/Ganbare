@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ganbare.src.Services.result;
+using ganbare.src.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static ganbare.src.DTO.ResultDTO;
 
 namespace ganbare.src.Controllers
 {
-   
+
     [ApiController]
     [Route("api/v1/[controller]")]
     public class ResultsController : ControllerBase
@@ -22,9 +23,9 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ResultReadDto>>> GetAll()
+        public async Task<ActionResult<List<ResultReadDto>>> GetAll(Logic logic)
         {
-            var resultList = await _resultService.GetAllAsync();
+            var resultList = await _resultService.GetAllAsync(logic);
             return Ok(resultList);
         }
 
@@ -42,19 +43,7 @@ namespace ganbare.src.Controllers
             return Ok(result);
         }
 
-/*
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UpdateOne(Guid id, ResultUpdateDto updateDto)
-        {
-            var resultUpdatedById = await _resultService.UpdateOneAsync(id, updateDto);
-            if (!resultUpdatedById)
-            {
-                return NotFound();
-            }
-            return Ok();
-        }
-*/
+
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
@@ -67,5 +56,25 @@ namespace ganbare.src.Controllers
             return NoContent();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAllAsyncScores(Logic logic)
+        {
+            var resultReadDtos = await _resultService.GetAllAsyncScores(logic);
+            return Ok(resultReadDtos);
+        }
+
+        /*
+                [HttpPut("{id}")]
+                [Authorize(Roles = "Admin")]
+                public async Task<ActionResult> UpdateOne(Guid id, ResultUpdateDto updateDto)
+                {
+                    var resultUpdatedById = await _resultService.UpdateOneAsync(id, updateDto);
+                    if (!resultUpdatedById)
+                    {
+                        return NotFound();
+                    }
+                    return Ok();
+                }
+        */
     }
 }

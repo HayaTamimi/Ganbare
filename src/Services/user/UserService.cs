@@ -105,15 +105,12 @@ namespace ganbare.src.Services.user
                     var token = new Token(_config);
                     return token.GnerateToken(foundUser);
                 }
-                // return "Unauthorized";
                 throw CustomException.UnAuthorized(
                     $"Password for user with email {foundUser.Email} does not match!"
                 );
             }
             else
             {
-                //return "Not Found";
-                //ًWhen users entered email address does not exist in our database
                 throw CustomException.NotFound($"User with email {createDto.Email} not found.");
             }
         }

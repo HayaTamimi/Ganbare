@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ganbare.src.Entity;
 using ganbare.src.Services.quiz;
+using ganbare.src.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static ganbare.src.DTO.QuizDTO;
@@ -14,7 +16,7 @@ namespace ganbare.src.Controllers
     [Route("api/v1/[controller]")]
     public class QuizzesController : ControllerBase
     {
-       protected readonly IQuizService _quizService;
+        protected readonly IQuizService _quizService;
 
         public QuizzesController(IQuizService service)
         {
@@ -22,9 +24,9 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<UserReadDto>>> GetAll()
+        public async Task<ActionResult<List<UserReadDto>>> GetAll(Logic logic)
         {
-            var quizList = await _quizService.GetAllAsync();
+            var quizList = await _quizService.GetAllAsync(logic);
             return Ok(quizList);
         }
 
@@ -42,30 +44,29 @@ namespace ganbare.src.Controllers
             return Ok(quiz);
         }
 
-/*
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
-        {
-            var quizUpdatedById = await _quizService.UpdateOneAsync(id, updateDto);
-            if (!quizUpdatedById)
-            {
-                return NotFound();
-            }
-            return Ok();
-        
+        /* [HttpPut("{id}")]
+         [Authorize(Roles = "Admin")]
+         public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
+         {
+             var quizUpdatedById = await _quizService.UpdateOneAsync(id, updateDto);
+             if (!quizUpdatedById)
+             {
+                 return NotFound();
+             }
+             return Ok();
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> DeleteOne(Guid id)
-        {
-            var quizDelete = await _quizService.DeleteOneAsync(id);
-            if (!quizDelete)
-            {
-                return NotFound();
-            }
-            return NoContent();
-        }
-*/
+
+         [HttpDelete("{id}")]
+         [Authorize(Roles = "Admin")]
+         public async Task<ActionResult> DeleteOne(Guid id)
+         {
+             var quizDelete = await _quizService.DeleteOneAsync(id);
+             if (!quizDelete)
+             {
+                 return NotFound();
+             }
+             return NoContent();
+         }
+ */
     }
 }

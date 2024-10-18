@@ -10,6 +10,10 @@ namespace ganbare.src.Entity
 {
     public class Quiz
     {
+        //We will have an array of questions and their options 
+        //(including correct answers) in the quiz as a navigation property,
+        // and we can easily get the score of each question of the 
+        //number/percentage of questions passed/failed.
         public Guid QuizId { get; set; }
 
         // if above 80% then pass if not then fail (80% = 8 out of 10 questions)
@@ -20,14 +24,18 @@ namespace ganbare.src.Entity
         // caculate the time taken
         //public float TimeTaken { get; set; } // changed the previous name which was duration
 
-        // to caculate the time taken (better thab the above idea)
-        public DateTime StartTime { get; set; }
+        // to caculate the time taken (better than the above idea)
+        public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; }
 
         public QuizLevel Level { get; set; }
 
+        [Required]
+        [Range(10, 10)]  // 10 Questions in each Quiz
         public List<Question> Questions { get; set; }
+
         public Guid? UserId { get; set; } // id always in many side 
+
         public Guid? ResultId { get; set; } // id always in many side
 
     }
