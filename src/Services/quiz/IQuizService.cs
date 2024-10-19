@@ -17,6 +17,8 @@ namespace ganbare.src.Services.quiz
         Task<List<QuizReadDto>> GetAllAsync(Logic logic);
         Task<QuizReadDto> GetByIdAsync(Guid quizId);
 
+        Task<QuizReadDto> GetByLevelAsync(QuizLevel quizLevel);
+
         //Task<List<QuizReadDto>> GetAllAsyncByLevels(); // didn't made logic of it yet
 
         //Task<Quiz> GetPoints(QuizLevel level);

@@ -8,7 +8,7 @@ namespace ganbare.src.Entity
 {
     public class Result
     {
-
+        //copied from my backend project to study it
         // this is how we collect Book.Price * cartItems.Quantity
         public Guid ResultId { get; set; }
 

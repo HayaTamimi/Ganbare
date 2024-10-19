@@ -7,6 +7,7 @@ using ganbare.src.Services.quiz;
 using ganbare.src.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Npgsql.Replication.PgOutput.Messages;
 using static ganbare.src.DTO.QuizDTO;
 using static ganbare.src.DTO.UserDTO;
 
@@ -42,6 +43,20 @@ namespace ganbare.src.Controllers
             }
 
             return Ok(quiz);
+        }
+
+
+        [HttpGet("{level}")]
+        public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel level)
+        {
+            var quizLevel = await _quizService.GetByLevelAsync(level);
+
+            if (quizLevel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(quizLevel);
         }
 
         /* [HttpPut("{id}")]

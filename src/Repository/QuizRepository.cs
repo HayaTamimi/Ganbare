@@ -45,6 +45,12 @@ namespace ganbare.src.Repository
             return await _quiz.FindAsync(id);
 
         }
+
+         public async Task<Quiz?> GetByLevelAsync(QuizLevel quizLevel)
+        {
+            return await _quiz.FindAsync(quizLevel);
+
+        }
         public async Task<List<Quiz>> GetAllAsync(Logic logic)
         {
             IQueryable<Quiz> query = _quiz;

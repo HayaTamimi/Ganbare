@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -13,7 +14,7 @@ namespace ganbare.src.Services.quiz
     public class QuizService : IQuizService
     {
         protected readonly QuizRepository _quizRepo;
-                protected readonly ResultRepository _resultRepo;
+        protected readonly ResultRepository _resultRepo;
 
         protected readonly IMapper _mapper;
 
@@ -49,6 +50,15 @@ namespace ganbare.src.Services.quiz
         }
 
 
+        public async Task<QuizReadDto> GetByLevelAsync(QuizLevel quizLevel)
+        {
+            var foundQuizLevel = await _quizRepo.GetByLevelAsync(quizLevel);
+            if (foundQuizLevel == null)
+            {
+                throw CustomException.NotFound($"Quiz with {quizLevel} cannot be found! ");
+            }
+            return _mapper.Map<Quiz, QuizReadDto>(foundQuizLevel);
+        }
         /*
                 public async Task<bool> DeleteOneAsync(Guid quizId)
                 {
