@@ -45,6 +45,9 @@ namespace ganbare.src.Controllers
             return Ok(quiz);
         }
 
+         // GET => /quizzes?level=3
+        //which means level 3 so here the users get the quizzes
+        // related to level 3 
 
         [HttpGet("{level}")]
         public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel level)
