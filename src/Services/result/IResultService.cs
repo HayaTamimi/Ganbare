@@ -13,7 +13,8 @@ namespace ganbare.src.Services.result
         Task<List<ResultReadDto>> GetAllAsync(Logic logic);
         Task<ResultReadDto> GetByIdAsync(Guid resultId);
         Task<bool> DeleteOneAsync(Guid resultId);
-        Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic); 
+        Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic);
+        Task<List<ResultReadDto>> GetSpeed(TimeSpan speed);
 
         }
 }

@@ -55,10 +55,15 @@ namespace ganbare.src.Repository
         }
         public async Task<List<Result>> GetAllAsync(Logic logic)
         {
-            
+
             return await _result.ToListAsync();
         }
 
+        public async Task<List<Result>> GetSpeed(TimeSpan speed)
+        {
+            var list = await _result.Include(l => l.Quiz).ToListAsync();
+            return list;
+        }
         public async Task<List<Result>> GetAllAsyncScores()
         {       // to get the order on the leaderboard 
                 // order by total scores

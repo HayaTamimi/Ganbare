@@ -72,6 +72,13 @@ namespace ganbare.src.Services.result
             return _mapper.Map<Result, ResultReadDto>(resultCreated);
         }
 
+        //        Task<List<ResultReadDto>> GetSpeed(TimeSpan speed);
+        public async Task<List<ResultReadDto>> GetSpeed(TimeSpan speed)
+        {
+            var resultSpeed = await _resultRepo.GetSpeed(speed);
+            var resultOFS = _mapper.Map<List<Result>, List<ResultReadDto>>(resultSpeed);
+            return resultOFS;
+        }
 
 
         public async Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic)

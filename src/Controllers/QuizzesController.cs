@@ -45,22 +45,23 @@ namespace ganbare.src.Controllers
             return Ok(quiz);
         }
 
-         // GET => /quizzes?level=3
+        // GET => /quizzes?level=3
         //which means level 3 so here the users get the quizzes
         // related to level 3 
 
-        [HttpGet("{level}")]
+        [HttpGet("quizlevel/{level}")]
         public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel level)
-        {
+        {    
+            
             var quizLevel = await _quizService.GetByLevelAsync(level);
 
-            if (quizLevel == null)
-            {
-                return NotFound();
-            }
+                if (quizLevel == null)
+                {
+                    return NotFound();
+                }
 
-            return Ok(quizLevel);
-        }
+                return Ok(quizLevel);
+        } 
 
         /* [HttpPut("{id}")]
          [Authorize(Roles = "Admin")]

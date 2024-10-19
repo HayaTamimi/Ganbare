@@ -63,6 +63,21 @@ namespace ganbare.src.Controllers
             return Ok(resultReadDtos);
         }
 
+
+   public async Task<ActionResult> GetSpeed([FromRoute] TimeSpan speed)
+        {
+            var speedOfQuiz = await _resultService.GetSpeed(speed);
+            var speeds = speedOfQuiz.FindAll(s => 
+                s.Result.Speed == speed
+            );
+
+            if (speeds == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(speeds);
+        }
         /*
                 [HttpPut("{id}")]
                 [Authorize(Roles = "Admin")]
