@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using ganbare.src.DTO;
 using ganbare.src.Entity;
 using ganbare.src.Repository;
 using ganbare.src.Utils;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using static ganbare.src.DTO.ResultDTO;
+
 
 namespace ganbare.src.Services.result
 {
@@ -15,13 +17,11 @@ namespace ganbare.src.Services.result
     {
         protected readonly ResultRepository _resultRepo;
         protected readonly IMapper _mapper;
-        protected readonly QuizRepository _quizRepository;
 
-        public ResultService(ResultRepository resultRepo, IMapper mapper, QuizRepository quizRepo)
+        public ResultService(ResultRepository resultRepo, IMapper mapper)
         {
             _resultRepo = resultRepo;
             _mapper = mapper;
-            _quizRepository = quizRepo;
 
         }
 
@@ -73,21 +73,47 @@ namespace ganbare.src.Services.result
         }
 
         //        Task<List<ResultReadDto>> GetSpeed(TimeSpan speed);
-        public async Task<List<ResultReadDto>> GetSpeed(TimeSpan speed)
+        // public async Task<List<ResultReadDto>> GetSpeed(TimeSpan speed)
+        // {var resultSpeed = await _resultRepo.GetSpeed(speed);
+        //var resultOFS = _mapper.Map<List<Result>, List<ResultReadDto>>(resultSpeed);
+        // return resultOFS; }
+
+        /*
+                public async Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic)
+                {
+                    var results = await _resultRepo.GetAllAsyncScores();
+                    var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
+                    return resultMap;
+                }
+        */
+
+        //var groupedResult = from s in studentList
+        //  group s by s.Age;
+        // Iterate each group
+        //foreach (var ageGroup in groupedResult)
+        //{ Console.WriteLine("Age Group: {0}", ageGroup.Key); // Each group has a key   
+        // Iterate students within each group
+        // foreach (Student s in ageGroup)
+        //   { Console.WriteLine("Student Name: {0}", s.StudentName);} }
+        public async Task<List<ResultReadDto>> GetAllAsyncScores()
         {
-            var resultSpeed = await _resultRepo.GetSpeed(speed);
-            var resultOFS = _mapper.Map<List<Result>, List<ResultReadDto>>(resultSpeed);
-            return resultOFS;
-        }
+            // Group by UserId and calculate total score
+            var query = await _result.GroupBy(r => r.UserId)
+                .Select(group => new
+                {
+                    UserId = group.Key,
+                    TotalScore = group.Sum(result => result.TotalScore)
+                })
+                .OrderByDescending(r => r.TotalScore)
+                .ThenBy(r => r.Speed)
+                .ToListAsync();
 
-
-        public async Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic)
-        {
-
-
-            var results = await _resultRepo.GetAllAsyncScores();
-            var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
-            return resultMap;
+            //list of result objects
+            return query.Select(result => new Result
+            {
+                UserId = result.UserId,
+                TotalScore = result.TotalScore
+            }).ToList();
         }
         /*
                                 public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)

@@ -24,6 +24,7 @@ namespace ganbare.src.DTO
 
         public class LeaderboardUpdateDto
         {
+
             public List<Result> Results { get; set; }
 
         }

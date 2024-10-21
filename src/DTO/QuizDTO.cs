@@ -17,9 +17,12 @@ namespace ganbare.src.DTO
             [Required]
             [Range(10, 10)]
             public Question Question { get; set; }
-            public DateTime? StartTime { get; set; }
-            public DateTime? EndTime { get; set; }
+            //public DateTime? StartTime { get; set; }
+            //public DateTime? EndTime { get; set; }
+            public float TimeTaken { get; set; }
             public int? QuizScore { get; set; }
+            public Result Result { get; set; }
+
             public User User { get; set; }
 
         }
@@ -27,8 +30,7 @@ namespace ganbare.src.DTO
         {
             public Guid QuizId { get; set; }
             public int? QuizScore { get; set; }
-            public DateTime? StartTime { get; set; }
-            public DateTime? EndTime { get; set; }
+           public float TimeTaken { get; set; }
             public List<Question> Questions { get; set; }
             public QuizLevel Level { get; set; }
             public Guid? UserId { get; set; }

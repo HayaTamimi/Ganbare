@@ -25,7 +25,7 @@ namespace ganbare.src.Entity
         public Role Role { get; set; } = Role.Customer; 
 
         // the quiz list can make us do a lot of things
-        public List<Quiz> Quizzes { get; set; } // if it's array it's ok to be without Q
+        public List<Quiz> Quizzes { get; set; } // if it's array it's ok to be without ?
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

@@ -25,8 +25,10 @@ namespace ganbare.src.Entity
         //public float TimeTaken { get; set; } // changed the previous name which was duration
 
         // to caculate the time taken (better than the above idea)
-        public DateTime StartTime { get; set; } = DateTime.Now;
-        public DateTime EndTime { get; set; }
+        //public DateTime StartTime { get; set; } = DateTime.Now;
+        //public DateTime EndTime { get; set; }
+
+        public float TimeTaken { get; set; }
 
         public QuizLevel Level { get; set; }
 

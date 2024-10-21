@@ -18,6 +18,7 @@ namespace ganbare.src.Repository
         {
             _databaseContext = databaseContext;
             _result = databaseContext.Set<Result>();
+
         }
 
         public async Task<Result> AddResultAsync(Result newResult)
@@ -73,7 +74,7 @@ namespace ganbare.src.Repository
             {
                 UserId = Group.Key,
                 TotalScore = Group.Sum(result => result.TotalScore),
-                Speed = Group.Quiz.EndTime - Group.Quiz.StartTime
+                Speed = Group.Quiz.TimeTaken
             })
                 .OrderBy(r => r.TotalScore)
                 .ThenBy(r => r.Speed)
@@ -81,5 +82,10 @@ namespace ganbare.src.Repository
 
             return userResults;
         }
+
+
+            //var results = await _resultRepo.GetAllAsyncScores();
+            // var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
+            //return resultMap;
     }
 }
