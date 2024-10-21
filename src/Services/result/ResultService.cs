@@ -85,24 +85,33 @@ namespace ganbare.src.Services.result
                     var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
                     return resultMap;
                 }
-        */
+        
+class Pet
+{
+    public string Name { get; set; }
+    public double Age { get; set; }
+}
 
-        //var groupedResult = from s in studentList
-        //  group s by s.Age;
-        // Iterate each group
-        //foreach (var ageGroup in groupedResult)
-        //{ Console.WriteLine("Age Group: {0}", ageGroup.Key); // Each group has a key   
-        // Iterate students within each group
-        // foreach (Student s in ageGroup)
-        //   { Console.WriteLine("Student Name: {0}", s.StudentName);} }
-        public async Task<List<ResultReadDto>> GetAllAsyncScores()
+public static void GroupByEx4()
+{
+    List<Pet> petsList = new List<Pet>{   new Pet { Name="Daisy", Age=4.3 } };
+    var query = petsList.GroupBy(
+        pet => Math.Floor(pet.Age),
+        pet => pet.Age,
+        (baseAge, ages) => new
         {
-            // Group by UserId and calculate total score
-            var query = await _result.GroupBy(r => r.UserId)
-                .Select(group => new
+            Key = baseAge,
+            Count = ages.Count(),
+            Min = ages.Min(),
+            Max = ages.Max()
+        });}*/
+        public async Task<List<ResultReadDto>> GetAllAsyncScores() // I tried everything inside() and nothing worked
+        {
+            var query = await _result.GroupBy(r => r.UserId) //_resultRepo  didn't work
+                .Select(result => new
                 {
-                    UserId = group.Key,
-                    TotalScore = group.Sum(result => result.TotalScore)
+                    UserId = result.Key,
+                    TotalScore = result.Sum(result => result.TotalScore)
                 })
                 .OrderByDescending(r => r.TotalScore)
                 .ThenBy(r => r.Speed)
