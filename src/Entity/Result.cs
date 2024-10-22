@@ -25,9 +25,6 @@ namespace ganbare.src.Entity
 
         public Guid? UserId { get; set; }
 
-        public Quiz Quiz { get; set; }
-        public Guid QuizId { get; set; }
-
         public List<Quiz> Quizzes { get; set; }
 
         public Guid LeaderboardId { get; set; }

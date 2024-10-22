@@ -55,11 +55,8 @@ namespace ganbare.src.Repository
         {
             IQueryable<Quiz> query = _quiz;
 
-            await query.Where(x => x.Level == QuizLevel.One).ToListAsync();
-            await query.Where(x => x.Level == QuizLevel.Two).ToListAsync();
-            await query.Where(x => x.Level == QuizLevel.Three).ToListAsync();
-            await query.Where(x => x.Level == QuizLevel.Four).ToListAsync();
-            await query.Where(x => x.Level == QuizLevel.Five).ToListAsync();
+            //await query.Where(x => x.Level == QuizLevel.One).ToListAsync();
+          
 
             if (logic.LevelScore == "One")
             {
@@ -81,6 +78,7 @@ namespace ganbare.src.Repository
             {
                 query = query.Where(q => q.QuizScore == 1);
             }
+            query = query.Take(10);
 
             return await query.ToListAsync();
         }

@@ -60,32 +60,28 @@ namespace ganbare.src.Repository
             return await _result.ToListAsync();
         }
 
-        public async Task<List<Result>> GetSpeed(TimeSpan speed)
-        {
-            var list = await _result.Include(l => l.Quiz).ToListAsync();
-            return list;
-        }
+
         public async Task<List<Result>> GetAllAsyncScores()
         {       // to get the order on the leaderboard 
                 // order by total scores
                 // then by speed
-            var userResults = await _result.GroupBy(r => r.UserId)
-            .Select(Group => new
-            {
-                UserId = Group.Key,
-                TotalScore = Group.Sum(result => result.TotalScore),
-                Speed = Group.Quiz.TimeTaken
-            })
-                .OrderBy(r => r.TotalScore)
-                .ThenBy(r => r.Speed)
-                .ToListAsync();
-
+                // var userResults = await _result.GroupBy(r => r.UserId)
+                // .Select(Group => new
+                //  {
+                //      UserId = Group.Key,
+                //      TotalScore = Group.Sum(result => result.TotalScore),
+                //       Speed = Group.Quiz.TimeTaken
+                //    })
+                //      .OrderBy(r => r.TotalScore)
+                //      .ThenBy(r => r.Speed)
+                //       .ToListAsync();
+            var userResults = await _result.Include((p) => p.Quizzes).ToListAsync();
             return userResults;
         }
 
 
-            //var results = await _resultRepo.GetAllAsyncScores();
-            // var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
-            //return resultMap;
+        //var results = await _resultRepo.GetAllAsyncScores();
+        // var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
+        //return resultMap;
     }
 }

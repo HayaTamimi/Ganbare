@@ -105,24 +105,24 @@ public static void GroupByEx4()
             Min = ages.Min(),
             Max = ages.Max()
         });}*/
-        public async Task<List<ResultReadDto>> GetAllAsyncScores() // I tried everything inside() and nothing worked
+        
+            public async Task<List<ResultReadDto>> GetAllAsyncScores() // I tried everything inside() and nothing worked
         {
-            var query = await _result.GroupBy(r => r.UserId) //_resultRepo  didn't work
-                .Select(result => new
-                {
-                    UserId = result.Key,
-                    TotalScore = result.Sum(result => result.TotalScore)
-                })
-                .OrderByDescending(r => r.TotalScore)
-                .ThenBy(r => r.Speed)
-                .ToListAsync();
 
-            //list of result objects
-            return query.Select(result => new Result
-            {
-                UserId = result.UserId,
-                TotalScore = result.TotalScore
-            }).ToList();
+            var resultList = await _resultRepo.GetAllAsyncScores();
+            var resultScores = _mapper.Map<List<Result>, List<ResultReadDto>>(resultList);
+
+
+            resultScores[0].TotalScore = resultScores[0].Quizzes.Sum (r => r.QuizScore);
+
+
+
+           // resultScores[0].TotalScore = 100;
+
+            return resultScores;
+
+
+       
         }
         /*
                                 public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)

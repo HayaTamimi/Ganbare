@@ -23,6 +23,7 @@ namespace ganbare.src.DTO
         {
             public Guid ResultId { get; set; }
             public double? TotalScore { get; set; }
+             public List<Quiz> Quizzes { get; set; }
 
             public double? Speed { get; set; }
 
