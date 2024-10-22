@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ganbare")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6c4ba6e103f428a74fc29937e2ebd88fe5823768")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b1ea80f1682b666846b1841806c124e2ed87109")]
 [assembly: System.Reflection.AssemblyProductAttribute("ganbare")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ganbare")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
