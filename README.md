@@ -17,12 +17,16 @@ A Quiz web app to prepare you for JLPT which stands for Japanese Language Profic
 
 ## Technologies Used
 
+### Back End
+
 - **.Net 8**: Web API Framework
 - **Entity Framework Core**: ORM for database interactions
 - **PostgreSQl**: Relational database for storing data
 - **JWT**: For user authentication and authorization
 - **AutoMapper**: For object mapping
 - **Swagger**: API documentation
+
+### Front End (later)
 - **React Js**: Javascript Framework
 - **Bootstrap**: CSS framework
 - **Axios**: 
