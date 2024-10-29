@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ganbare.src.Entity
 {
-    public class Result
+    public class Result // for the leaderboard
     {
         //copied from my backend project to study it
         // this is how we collect Book.Price * cartItems.Quantity
@@ -25,7 +25,7 @@ namespace ganbare.src.Entity
 
         public Guid? UserId { get; set; }
 
-        public List<Quiz> Quizzes { get; set; }
+        public List<Quiz>? Quizzes { get; set; }
 
         public Guid LeaderboardId { get; set; }
 

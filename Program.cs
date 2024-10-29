@@ -26,7 +26,6 @@ builder.Configuration.GetConnectionString("Local")
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
 dataSourceBuilder.MapEnum<Role>();
-dataSourceBuilder.MapEnum<QuestionLevel>();
 dataSourceBuilder.MapEnum<QuizLevel>(); 
 
 

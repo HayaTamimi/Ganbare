@@ -11,7 +11,7 @@ using static ganbare.src.DTO.QuestionDTO;
 namespace ganbare.src.Services.question
 {
 
-   public class QuestionService : IQuestionService
+    public class QuestionService : IQuestionService
     {
         protected readonly QuestionRepository _questionRepo;
         protected readonly IMapper _mapper;
@@ -32,8 +32,8 @@ namespace ganbare.src.Services.question
 
         public async Task<List<QuestionReadDto>> GetAllAsync()
         {
-            var leaderboardList = await _questionRepo.GetAllAsync();
-            return _mapper.Map<List<Question>, List<QuestionReadDto>>(leaderboardList);
+            var questionList = await _questionRepo.GetAllAsync();
+            return _mapper.Map<List<Question>, List<QuestionReadDto>>(questionList);
         }
 
         public async Task<QuestionReadDto> GetByIdAsync(Guid questionId)
@@ -70,16 +70,18 @@ namespace ganbare.src.Services.question
 
         public async Task<bool> UpdateOneAsync(Guid questionId, QuestionUpdateDto updateDto)
         {
-            var foundLeaderboard = await _questionRepo.GetByIdAsync(questionId);
+            var foundQuestion = await _questionRepo.GetByIdAsync(questionId);
 
-            if (foundLeaderboard == null)
+            if (foundQuestion == null)
             {
                 throw CustomException.NotFound(
                     $"Question with ID {questionId} cannot be found for updating."
                 );
             }
-            _mapper.Map(updateDto, foundLeaderboard);
-            return await _questionRepo.UpdateOneAsync(foundLeaderboard);
+            _mapper.Map(updateDto, foundQuestion);
+            return await _questionRepo.UpdateOneAsync(foundQuestion);
         }
+
+
     }
 }

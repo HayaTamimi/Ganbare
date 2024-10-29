@@ -7,7 +7,10 @@ using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ganbare.src.Entity
-{
+{//GET /api/quizzes/levels/{level_id}/: Retrieve or update a specific level.
+// GET /api/quizzes/{quiz_id}/questions/: Retrieve a list of questions for a specific quiz or create a new question.
+// GET /api/quizzes/start/: Start a quiz by providing the quiz ID.
+// POST /api/quizzes/submit/: Submit a quiz with the answers.
     public class Quiz
     {
         //We will have an array of questions and their options 
@@ -28,7 +31,7 @@ namespace ganbare.src.Entity
         //public DateTime StartTime { get; set; } = DateTime.Now;
         //public DateTime EndTime { get; set; }
 
-        public float TimeTaken { get; set; }
+        public float? TimeTaken { get; set; }
 
         public QuizLevel Level { get; set; }
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ganbare.src.Entity
 {
+// GET /api/questions/{question_id}/answers/: Retrieve a list of answers for a specific question or create a new answer.
     public class Question
     {
         public Guid QuestionId { get; set; }
@@ -18,8 +19,7 @@ namespace ganbare.src.Entity
         [Required]
         public string Answer { get; set; }
 
-        [Required]
-        public QuestionLevel Jlptlevel { get; set; }
+       // public QuestionLevel Jlptlevel { get; set; } not important here
 
         public List<Option> Options { get; set; }
 
@@ -27,14 +27,4 @@ namespace ganbare.src.Entity
 
     }
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-
-    public enum QuestionLevel
-    {
-        One, // easiest level
-        Two,
-        Three,
-        Four,
-        Five // hardest level
-    }
 }

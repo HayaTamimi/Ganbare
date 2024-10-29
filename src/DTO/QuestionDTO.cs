@@ -18,11 +18,12 @@ namespace ganbare.src.DTO
 
             [Required]
             public string Answer { get; set; }
-            public QuestionLevel Jlptlevel { get; set; }
+            // public QuestionLevel Jlptlevel { get; set; } not needed
 
-            public List<Option> Options { get; set; }
+            // [Required, Range(4, 4)]
+            //public List<Option> Options { get; set; }
 
-            public Guid? QuizId { get; set; }
+            //  public Guid? QuizId { get; set; } // maybe add it later?
 
         }
 
@@ -34,7 +35,7 @@ namespace ganbare.src.DTO
 
             public string Answer { get; set; }
 
-            public QuestionLevel Jlptlevel { get; set; }
+            //public QuestionLevel Jlptlevel { get; set; } not important
 
             public Guid? QuizID { get; set; }
 

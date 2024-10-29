@@ -71,42 +71,8 @@ namespace ganbare.src.Services.result
 
             return _mapper.Map<Result, ResultReadDto>(resultCreated);
         }
-
-        //        Task<List<ResultReadDto>> GetSpeed(TimeSpan speed);
-        // public async Task<List<ResultReadDto>> GetSpeed(TimeSpan speed)
-        // {var resultSpeed = await _resultRepo.GetSpeed(speed);
-        //var resultOFS = _mapper.Map<List<Result>, List<ResultReadDto>>(resultSpeed);
-        // return resultOFS; }
-
-        /*
-                public async Task<List<ResultReadDto>> GetAllAsyncScores(Logic logic)
-                {
-                    var results = await _resultRepo.GetAllAsyncScores();
-                    var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
-                    return resultMap;
-                }
         
-class Pet
-{
-    public string Name { get; set; }
-    public double Age { get; set; }
-}
-
-public static void GroupByEx4()
-{
-    List<Pet> petsList = new List<Pet>{   new Pet { Name="Daisy", Age=4.3 } };
-    var query = petsList.GroupBy(
-        pet => Math.Floor(pet.Age),
-        pet => pet.Age,
-        (baseAge, ages) => new
-        {
-            Key = baseAge,
-            Count = ages.Count(),
-            Min = ages.Min(),
-            Max = ages.Max()
-        });}*/
-        
-            public async Task<List<ResultReadDto>> GetAllAsyncScores() // I tried everything inside() and nothing worked
+            public async Task<List<ResultReadDto>> GetAllAsyncScores()
         {
 
             var resultList = await _resultRepo.GetAllAsyncScores();
@@ -116,12 +82,9 @@ public static void GroupByEx4()
             resultScores[0].TotalScore = resultScores[0].Quizzes.Sum (r => r.QuizScore);
 
 
-
            // resultScores[0].TotalScore = 100;
 
             return resultScores;
-
-
        
         }
         /*

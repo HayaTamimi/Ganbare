@@ -12,13 +12,12 @@ namespace ganbare.src.DTO
         {
 
             [Required]
-            [Range(4, 4)]
-            public string Choice { get; set; }
+            public string Choice { get; set; } // 1 choice for each option
 
             [Required]
             public bool IsCorrect { get; set; }
 
-            //public Guid? QuesitionId { get; set; } 
+            //public Guid? QuestionId { get; set; } 
 
         }
 
@@ -28,7 +27,7 @@ namespace ganbare.src.DTO
             public Guid OptionId { get; set; }
             public string Choice { get; set; }
             public bool IsCorrect { get; set; }
-            public Guid? QuesitionId { get; set; }
+            public Guid? QuestionId { get; set; }
 
         }
 

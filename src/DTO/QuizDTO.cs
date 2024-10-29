@@ -14,16 +14,13 @@ namespace ganbare.src.DTO
             // when quiz is created, it's need the details of the 
             // questions and users otherwise it can't happen
 
-            [Required]
-            [Range(10, 10)]
-            public Question Question { get; set; }
-            //public DateTime? StartTime { get; set; }
-            //public DateTime? EndTime { get; set; }
-            public float TimeTaken { get; set; }
-            public int? QuizScore { get; set; }
-            public Result Result { get; set; }
+            // [Required]
+            // [Range(10, 10)] 
+            // public List<Question> Question { get; set; }
+      
+            //public int? QuizScore { get; set; } // maybe add it later?
 
-            public User User { get; set; }
+           // public Result Result { get; set; } // // maybe add it later?
 
         }
         public class QuizReadDto

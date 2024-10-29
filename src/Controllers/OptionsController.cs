@@ -20,7 +20,15 @@ namespace ganbare.src.Controllers
         {
             _optionService = service;
         }
-
+ 
+        [HttpPost]
+        // [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<OptionReadDto>> CreateOne([FromBody] OptionCreateDto createDto)
+        {
+            var optionCreated = await _optionService.CreateOneAsync(createDto);
+            return Ok(optionCreated);
+        }
+        
         [HttpGet]
         public async Task<ActionResult<List<OptionReadDto>>> GetAll()
         {
@@ -29,7 +37,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+         //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<OptionReadDto>> GetById([FromRoute] Guid id)
         {
             var option = await _optionService.GetByIdAsync(id);
@@ -43,7 +51,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, OptionUpdateDto updateDto)
         {
             var optionUpdatedById = await _optionService.UpdateOneAsync(id, updateDto);
@@ -55,7 +63,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var optionDelete = await _optionService.DeleteOneAsync(id);

@@ -18,6 +18,9 @@ namespace ganbare.src.DTO
 
             [EmailAddress, Required]
             public string Email { get; set; }
+            
+            public Role Role { get; set; } = Role.Customer; 
+
 
             [DataType(DataType.Password), Required]
             public string Password { get; set; }

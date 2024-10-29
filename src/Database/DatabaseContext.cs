@@ -25,9 +25,9 @@ namespace ganbare.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
-            modelBuilder.HasPostgresEnum<QuestionLevel>();
             modelBuilder.HasPostgresEnum<QuizLevel>();
             modelBuilder.Entity<User>().HasIndex(u => u.Email).IsUnique();
+            modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
         }
     }
 }

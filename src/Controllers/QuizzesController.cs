@@ -24,6 +24,16 @@ namespace ganbare.src.Controllers
             _quizService = service;
         }
 
+
+        [HttpPost]
+       //  [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<QuizReadDto>> CreateOne([FromBody] QuizCreateDto createDto)
+        {
+            var quizCreated = await _quizService.CreateOneAsync(createDto);
+            return Ok(quizCreated);
+        }
+
+
         [HttpGet]
         public async Task<ActionResult<List<UserReadDto>>> GetAll(Logic logic)
         {
@@ -32,7 +42,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<QuizReadDto>> GetById([FromRoute] Guid id)
         {
             var quiz = await _quizService.GetByIdAsync(id);
@@ -49,7 +59,7 @@ namespace ganbare.src.Controllers
         //which means level 3 so here the users get the quizzes
         // related to level 3 
 
-        [HttpGet("quizlevel/{level}")]
+        [HttpGet("quizlevel/{level}")] // [HttpGet("scores")]
         public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel level)
         {    
             

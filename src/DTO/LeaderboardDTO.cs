@@ -11,7 +11,7 @@ namespace ganbare.src.DTO
     {
         public class LeaderboardCreateDto
         {
-            public List<Result>? Results { get; set; }
+          public List<Result>? Results { get; set; } // added this bescause i had error without it
 
         }
         public class LeaderboardReadDto

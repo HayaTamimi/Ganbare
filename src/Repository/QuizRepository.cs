@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using ganbare.src.Controllers;
 using ganbare.src.Database;
 using ganbare.src.Entity;
 using ganbare.src.Utils;
@@ -46,17 +48,43 @@ namespace ganbare.src.Repository
 
         }
 
-         public async Task<Quiz?> GetByLevelAsync(QuizLevel quizLevel)
+        public async Task<Quiz?> GetByLevelAsync(QuizLevel quizLevel)
         {
             return await _quiz.FindAsync(quizLevel);
 
         }
+
+        public int CalculateQuizScore(Quiz quiz, List<Question> questions, List<Option> options)
+        {
+            int quizScore = 0;
+
+            foreach (var question in questions)
+            {
+                var userChoice = options.FirstOrDefault(x => x.QuestionId == question.QuestionId);
+
+                if (question != null && userChoice != null)
+                {
+                    var correct = question.Options.FirstOrDefault(o => o.IsCorrect);
+
+                    if (correct != null && correct.OptionId == userChoice.OptionId)
+                    {
+                        quizScore++;
+                    }
+                }
+            }
+
+            return quizScore;
+        }
+
+
+
+
         public async Task<List<Quiz>> GetAllAsync(Logic logic)
         {
+
             IQueryable<Quiz> query = _quiz;
 
             //await query.Where(x => x.Level == QuizLevel.One).ToListAsync();
-          
 
             if (logic.LevelScore == "One")
             {

@@ -16,12 +16,12 @@ namespace ganbare.src.Repository
         public QuestionRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
-           _question = databaseContext.Set<Question>();
+            _question = databaseContext.Set<Question>();
         }
 
         public async Task<Question> CreateOneAsync(Question newQuestion)
         {
-            
+
             await _question.AddAsync(newQuestion);
             await _databaseContext.SaveChangesAsync();
             return newQuestion;
@@ -46,6 +46,8 @@ namespace ganbare.src.Repository
         public async Task<List<Question>> GetAllAsync()
         {
             return await _question.ToListAsync();
-        }  
+        }
+
+
     }
 }

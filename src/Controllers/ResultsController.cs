@@ -22,6 +22,14 @@ namespace ganbare.src.Controllers
             _resultService = service;
         }
 
+
+        [HttpPost]
+     //   [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ResultReadDto>> CreateOne([FromBody] ResultCreateDto createDto)
+        {
+            var resultCreated = await _resultService.CreateOneAsync(createDto);
+            return Ok(resultCreated);
+        }
         [HttpGet]
         public async Task<ActionResult<List<ResultReadDto>>> GetAll(Logic logic)
         {
@@ -30,7 +38,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin")]
+       //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResultReadDto>> GetById([FromRoute] Guid id)
         {
             var result = await _resultService.GetByIdAsync(id);
@@ -45,7 +53,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
+      //   [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var resultDelete = await _resultService.DeleteOneAsync(id);
@@ -55,20 +63,21 @@ namespace ganbare.src.Controllers
             }
             return NoContent();
         }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllAsyncScores( )
+        //api/v1/results/scores
+        [HttpGet("scores")]
+      // [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAllAsyncScores()
         {
             var resultReadDtos = await _resultService.GetAllAsyncScores();
             return Ok(resultReadDtos);
         }
 
 
-   //public async Task<ActionResult> GetSpeed([FromRoute] TimeSpan speed)
-       // { var speedOfQuiz = await _resultService.GetSpeed(speed);
-//            var speeds = speedOfQuiz.FindAll(s =>
-         //       s.Result.Speed == speed
-         //   );if (speeds == null)
+        //public async Task<ActionResult> GetSpeed([FromRoute] TimeSpan speed)
+        // { var speedOfQuiz = await _resultService.GetSpeed(speed);
+        //            var speeds = speedOfQuiz.FindAll(s =>
+        //       s.Result.Speed == speed
+        //   );if (speeds == null)
         //    { return NotFound(); }return Ok(speeds);}
         /*
                 [HttpPut("{id}")]
