@@ -8,11 +8,8 @@ namespace ganbare.src.Entity
 {
     public class Result // for the leaderboard
     {
-        //copied from my backend project to study it
-        // this is how we collect Book.Price * cartItems.Quantity
         public Guid ResultId { get; set; }
 
-        // TotalScore caculated depending on the level 
 
         //var totalScoreSum = createDto.Results.Sum(r => r.TotalScore);
         //var userResults = results.Where(r =>
@@ -20,7 +17,6 @@ namespace ganbare.src.Entity
 
         public double? TotalScore { get; set; } = 0;  //GetAll.Quiz.QuizScore
 
-        //change the time and type of data // 100%
         public TimeSpan? Speed { get; set; } // 0-1 
 
         public Guid? UserId { get; set; }

@@ -22,6 +22,13 @@ namespace ganbare.src.Services.option
         }
         public async Task<OptionReadDto> CreateOneAsync(OptionCreateDto createDto)
         {
+            var GetAllByQuestionId = await _optionRepo.GetAllByQuestionId(createDto.QuestionId);
+
+            if (GetAllByQuestionId.Count >= 4)
+            {
+                return null;
+            }
+
             var option = _mapper.Map<OptionCreateDto, Option>(createDto);
 
             var optionCreated = await _optionRepo.CreateOneAsync(option);
@@ -32,6 +39,12 @@ namespace ganbare.src.Services.option
         public async Task<List<OptionReadDto>> GetAllAsync()
         {
             var optionList = await _optionRepo.GetAllAsync();
+            return _mapper.Map<List<Option>, List<OptionReadDto>>(optionList);
+        }
+
+        public async Task<List<OptionReadDto>> GetAllByQuestionId(Guid questionId)
+        {
+            var optionList = await _optionRepo.GetAllByQuestionId(questionId);
             return _mapper.Map<List<Option>, List<OptionReadDto>>(optionList);
         }
 

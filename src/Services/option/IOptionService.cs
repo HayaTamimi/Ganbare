@@ -13,5 +13,6 @@ namespace ganbare.src.Services.option
         Task<OptionReadDto> GetByIdAsync(Guid resultId);
         Task<bool> DeleteOneAsync(Guid resultId);
         Task<bool> UpdateOneAsync(Guid resultId, OptionUpdateDto updateDto);
+        Task<List<OptionReadDto>> GetAllByQuestionId(Guid questionId);
     }
 }

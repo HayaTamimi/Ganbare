@@ -26,7 +26,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpPost]
-       //  [Authorize(Roles = "Admin")]
+        //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult<QuizReadDto>> CreateOne([FromBody] QuizCreateDto createDto)
         {
             var quizCreated = await _quizService.CreateOneAsync(createDto);
@@ -42,7 +42,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-       // [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<QuizReadDto>> GetById([FromRoute] Guid id)
         {
             var quiz = await _quizService.GetByIdAsync(id);
@@ -55,23 +55,21 @@ namespace ganbare.src.Controllers
             return Ok(quiz);
         }
 
-        // GET => /quizzes?level=3
-        //which means level 3 so here the users get the quizzes
-        // related to level 3 
 
-        [HttpGet("quizlevel/{level}")] // [HttpGet("scores")]
-        public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel level)
-        {    
-            
-            var quizLevel = await _quizService.GetByLevelAsync(level);
+        [HttpGet("quizzes")] // GET => /quizzes?level=n3 // n3 = level 3
+        public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel? level)
+        {
 
-                if (quizLevel == null)
-                {
-                    return NotFound();
-                }
+            var quizLevel = await _quizService.GetByLevel();
 
-                return Ok(quizLevel);
-        } 
+            if (level.HasValue)
+            {
+                quizLevel = quizLevel.Where(q => q.Level == level);
+            }
+
+            var quizzes = await quizLevel.ToListAsync();
+            return Ok(quizzes);
+        }
 
         /* [HttpPut("{id}")]
          [Authorize(Roles = "Admin")]

@@ -46,6 +46,12 @@ namespace ganbare.src.Repository
         public async Task<List<Option>> GetAllAsync()
         {
             return await _option.ToListAsync();
-        }        
+        }     
+
+         public async Task<List<Option>> GetAllByQuestionId(Guid questionId)
+        {
+            return await _option.Where((option) => 
+            option.QuestionId == questionId).ToListAsync();
+        }     
     }
 }

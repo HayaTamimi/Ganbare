@@ -76,9 +76,6 @@ namespace ganbare.src.Repository
             return quizScore;
         }
 
-
-
-
         public async Task<List<Quiz>> GetAllAsync(Logic logic)
         {
 

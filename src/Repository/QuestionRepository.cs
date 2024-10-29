@@ -45,7 +45,8 @@ namespace ganbare.src.Repository
         }
         public async Task<List<Question>> GetAllAsync()
         {
-            return await _question.ToListAsync();
+            var listAsync = await _question.Include(question => question.Options).ToListAsync();
+            return listAsync;
         }
 
 

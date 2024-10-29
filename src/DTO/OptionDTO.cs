@@ -12,12 +12,14 @@ namespace ganbare.src.DTO
         {
 
             [Required]
-            public string Choice { get; set; } // 1 choice for each option
+            public string Choice { get; set; }
 
             [Required]
             public bool IsCorrect { get; set; }
 
-            public Guid? QuestionId { get; set; } 
+            // removed the ? because we don't want it consider null
+            public Guid QuestionId { get; set; }
+
 
         }
 
@@ -34,7 +36,6 @@ namespace ganbare.src.DTO
         public class OptionUpdateDto
         {
             [Required]
-            [Range(4, 4)]
             public string Choice { get; set; }
 
             [Required]

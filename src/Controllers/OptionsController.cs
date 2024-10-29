@@ -62,6 +62,20 @@ namespace ganbare.src.Controllers
             return Ok();
         }
 
+         [HttpGet("/questions/{questionsId}")]  
+         [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<OptionReadDto>> GetAllByQuestionId([FromRoute] Guid questionId)
+        {
+            var option = await _optionService.GetAllByQuestionId(questionId);
+
+            if (option == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(option);
+        }
+
         [HttpDelete("{id}")]
         // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)

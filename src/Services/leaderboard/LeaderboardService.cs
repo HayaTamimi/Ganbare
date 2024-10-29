@@ -24,7 +24,7 @@ namespace ganbare.src.Services.leaderboard
         }
         public async Task<LeaderboardReadDto> CreateOneAsync(LeaderboardCreateDto createDto)
         {
-            var totalScores = createDto.Results.Sum(r => r.TotalScore);
+         //   var totalScores = createDto.Results.Sum(r => r.TotalScore);
 
             var leaderboard = _mapper.Map<LeaderboardCreateDto, Leaderboard>(createDto);
 

@@ -19,8 +19,6 @@ namespace ganbare.src.Entity
         [Required]
         public string Answer { get; set; }
 
-       // public QuestionLevel Jlptlevel { get; set; } not important here
-
         public List<Option> Options { get; set; }
 
         public Guid? QuizId { get; set; }

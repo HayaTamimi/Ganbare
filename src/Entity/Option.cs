@@ -11,13 +11,10 @@ namespace ganbare.src.Entity
         public Guid OptionId { get; set; }
 
         [Required]
-        [Range(4, 4)]
-        public string choice { get; set; } 
-
-        // calculate the score based on the number of correct answers.
+        public string choice { get; set; }
 
         [Required]
-        public bool IsCorrect { get; set; } 
+        public bool IsCorrect { get; set; } = false;
 
         public Guid? QuestionId { get; set; }
     }

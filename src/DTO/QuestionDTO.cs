@@ -20,7 +20,6 @@ namespace ganbare.src.DTO
             public string Answer { get; set; }
             // public QuestionLevel Jlptlevel { get; set; } not needed
 
-            // [Required, Range(4, 4)]
             //public List<Option> Options { get; set; }
 
             //  public Guid? QuizId { get; set; } // maybe add it later?
