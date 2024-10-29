@@ -17,7 +17,7 @@ namespace ganbare.src.DTO
             [Required]
             public bool IsCorrect { get; set; }
 
-            //public Guid? QuestionId { get; set; } 
+            public Guid? QuestionId { get; set; } 
 
         }
 
