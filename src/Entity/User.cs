@@ -14,8 +14,7 @@ namespace ganbare.src.Entity
         public Guid UserId { get; set; }
 
         [StringLength(14, MinimumLength = 3,
-        ErrorMessage = "Username should be less than 15 letters & more than 2!"),
-        Index(IsUnique = true), Required]
+        ErrorMessage = "Username should be less than 15 letters & more than 2!"), Required]
         public string Username { get; set; }
         // public int Score { get; set; }
         [EmailAddress, Required]
