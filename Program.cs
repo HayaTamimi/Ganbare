@@ -15,9 +15,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
-using static ganbare.src.Entity.Question;
 
 var builder = WebApplication.CreateBuilder(args);
+
+ builder.Services.AddControllersWithViews();
+
 
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(
 builder.Configuration.GetConnectionString("Local")
@@ -28,13 +30,23 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<QuizLevel>(); 
 
+var dataSource = dataSourceBuilder.Build();
+builder.Services.AddSingleton(dataSource);
 
+// delete this section
+// builder.Services.AddDbContext<DatabaseContext>(options =>
+// {
+//     options.UseNpgsql(dataSourceBuilder.Build());
+//     options.EnableSensitiveDataLogging();
+// });
 
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    options.UseNpgsql(dataSourceBuilder.Build());
-    options.EnableSensitiveDataLogging();
+    options.UseNpgsql(dataSource);
 });
+
+
+builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
 builder.Services.AddScoped<ILeaderboardService, LeaderboardService>().AddScoped<LeaderboardRepository, LeaderboardRepository>();
 
@@ -48,6 +60,22 @@ builder.Services.AddScoped<IResultService, ResultService>().AddScoped<ResultRepo
 
 builder.Services.AddScoped<IUserService, UserService>().AddScoped<UserRepository, UserRepository>();
 
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:5171"
+                         // , "http://deployemntkink"
+                          )
+                          .AllowAnyHeader()
+                            .AllowAnyMethod()
+                            .SetIsOriginAllowed((host) => true)
+                            .AllowCredentials();
+                      });
+});
 
 builder
     .Services.AddAuthentication(options =>
@@ -70,6 +98,13 @@ builder
             ),
         };
     });
+
+    builder.Services.AddAuthorization(
+    options =>
+    {
+        options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
+    }
+    );
 
 builder.Services.AddControllersWithViews().AddJsonOptions(options =>
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
@@ -103,9 +138,10 @@ using (var scope = app.Services.CreateScope())
 
 app.UseMiddleware<LoggingMiddleware>();
 app.UseMiddleware<ErrorHandlerMiddleware>();
+
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseCors(MyAllowSpecificOrigins);
 app.MapControllers();
 
 if (app.Environment.IsDevelopment())
@@ -113,5 +149,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapGet("/", () => "Hello, World!");
 
 app.Run();

@@ -15,7 +15,7 @@ namespace ganbare.src.DTO
             // questions and users otherwise it can't happen
 
             // [Required]
-            // public List<Question> Question { get; set; }
+            //public List<Question> Question { get; set; }
       
             //public int? QuizScore { get; set; } // maybe add it later?
 

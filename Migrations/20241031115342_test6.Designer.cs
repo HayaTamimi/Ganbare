@@ -13,8 +13,8 @@ using ganbare.src.Entity;
 namespace ganbare.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20241027154423_test")]
-    partial class test
+    [Migration("20241031115342_test6")]
+    partial class test6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace ganbare.Migrations
                 .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "quiz_level", new[] { "one", "two", "three", "four", "five" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "quiz_level", new[] { "n5", "n4", "n3", "n2", "n1" });
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "customer" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
@@ -170,6 +170,9 @@ namespace ganbare.Migrations
                     b.HasKey("UserId");
 
                     b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("Username")
                         .IsUnique();
 
                     b.ToTable("Users");

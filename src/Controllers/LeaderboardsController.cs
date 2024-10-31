@@ -75,6 +75,3 @@ namespace ganbare.src.Controllers
 
     }
 }
-// The optional query string (eg. ?search=node),
-// which appears after a ‘?’ and assigns values to parameters.
-// Common uses of query strings include search parameters and filters.

@@ -51,7 +51,9 @@ namespace ganbare.src.DTO
 
             public string? Answer { get; set; }
 
-            public List<Option> Options { get; set; }
+           public List<Option> Options { get; set; }
+
+            //public Guid? QuizID { get; set; }
 
         }
     }

@@ -7,13 +7,13 @@ using ganbare.src.Entity;
 namespace ganbare.Migrations
 {
     /// <inheritdoc />
-    public partial class test : Migration
+    public partial class test6 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
-                .Annotation("Npgsql:Enum:quiz_level", "one,two,three,four,five")
+                .Annotation("Npgsql:Enum:quiz_level", "n5,n4,n3,n2,n1")
                 .Annotation("Npgsql:Enum:role", "admin,customer");
 
             migrationBuilder.CreateTable(
@@ -157,6 +157,12 @@ namespace ganbare.Migrations
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Username",
+                table: "Users",
+                column: "Username",
                 unique: true);
         }
 
