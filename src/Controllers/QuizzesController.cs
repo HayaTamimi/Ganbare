@@ -56,20 +56,28 @@ namespace ganbare.src.Controllers
         }
 
 
-        [HttpGet("quizzes")] // GET => /quizzes?level=n3 // n3 = level 3
+        [HttpGet("quizzes")] // Get one quiz by level
         public async Task<ActionResult<QuizReadDto>> GetByLevel(QuizLevel? level)
         {
+            var quizLevel = await _quizService.GetByLevel(level);
 
-            var quizLevel = await _quizService.GetByLevel();
+            // if (level.HasValue)
+            // {
+            //     quizLevel = quizLevel.Where(q => q.Level == level);
+            // }
 
-            if (level.HasValue)
-            {
-                quizLevel = quizLevel.Where(q => q.Level == level);
-            }
-
-            var quizzes = await quizLevel.ToListAsync();
-            return Ok(quizzes);
+            // var quizzes = await quizLevel.ToListAsync();
+            return Ok(quizLevel);
         }
+
+        // [HttpGet("quizzes/{level}")] // GET => /quizzes?level=n5 
+        // public async Task<ActionResult<List<QuizReadDto>> GetAllQuestionsByLevel(QuizLevel? level)
+        // {
+
+        //     var quizLevel = await _quizService.GetAllQuestionsByLevel(level);
+
+        //     return Ok(quizLevel);
+        // }
 
         /* [HttpPut("{id}")]
          [Authorize(Roles = "Admin")]

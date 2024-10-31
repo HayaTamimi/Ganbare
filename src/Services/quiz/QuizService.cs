@@ -50,16 +50,33 @@ namespace ganbare.src.Services.quiz
         }
 
 
-       
-        public async Task<QuizReadDto> GetByLevelAsync(QuizLevel quizLevel)
+        public async Task<QuizReadDto> GetByLevel(QuizLevel? level)
         {
-            var foundQuizLevel = await _quizRepo.GetByLevelAsync(quizLevel);
+            var foundQuizLevel = await _quizRepo.GetByLevel(level);
             if (foundQuizLevel == null)
             {
-                throw CustomException.NotFound($"Quiz with {quizLevel} cannot be found! ");
+                throw CustomException.NotFound($"Quiz with {level} cannot be found! ");
             }
             return _mapper.Map<Quiz, QuizReadDto>(foundQuizLevel);
         }
+
+        // public async Task<List<QuizReadDto>> GetAllQuestionsByLevel(QuizLevel? level)
+        // {
+        //     var allQuizzes = await _quizRepo.GetAllQuestionsByLevel(level);
+
+        //     if (!allQuizzes.Any())
+        //     {
+        //         throw CustomException.NotFound("No quizzes of the level found! ");
+        //     }
+
+        //     var filteredQuizzes = allQuizzes.Where(q => q.Level == level);
+
+        //     return _mapper.Map<List<Quiz>, List<QuizReadDto>>(filteredQuizzes);
+
+        // }
+
+        //List<QuizReadDto> other function all quzzes
+
         /*
                 public async Task<bool> DeleteOneAsync(Guid quizId)
                 {

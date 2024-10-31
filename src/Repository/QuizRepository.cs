@@ -48,33 +48,39 @@ namespace ganbare.src.Repository
 
         }
 
-        public async Task<Quiz?> GetByLevelAsync(QuizLevel quizLevel)
+        public async Task<Quiz?> GetByLevel(QuizLevel? level)
         {
-            return await _quiz.FindAsync(quizLevel);
+            return await _quiz.FindAsync(level);
 
         }
+//comment same
+        //  public async Task<Quiz?> GetAllQuestionsByLevel(QuizLevel? level) //check
+        // {
+        //     return await _quiz.FindAsync(level);
 
-        public int CalculateQuizScore(Quiz quiz, List<Question> questions, List<Option> options)
-        {
-            int quizScore = 0;
+        // }
 
-            foreach (var question in questions)
-            {
-                var userChoice = options.FirstOrDefault(x => x.QuestionId == question.QuestionId);
+        // public int CalculateQuizScore(Quiz quiz, List<Question> questions, List<Option> options)
+        // {
+        //     int quizScore = 0;
 
-                if (question != null && userChoice != null)
-                {
-                    var correct = question.Options.FirstOrDefault(o => o.IsCorrect);
+        //     foreach (var question in questions)
+        //     {
+        //         var userChoice = options.FirstOrDefault(x => x.QuestionId == question.QuestionId);
 
-                    if (correct != null && correct.OptionId == userChoice.OptionId)
-                    {
-                        quizScore++;
-                    }
-                }
-            }
+        //         if (question != null && userChoice != null)
+        //         {
+        //             var correct = question.Options.FirstOrDefault(o => o.IsCorrect);
 
-            return quizScore;
-        }
+        //             if (correct != null && correct.OptionId == userChoice.OptionId)
+        //             {
+        //                 quizScore++;
+        //             }
+        //         }
+        //     }
+
+        //     return quizScore;
+        // }
 
         public async Task<List<Quiz>> GetAllAsync(Logic logic)
         {
@@ -83,26 +89,26 @@ namespace ganbare.src.Repository
 
             //await query.Where(x => x.Level == QuizLevel.One).ToListAsync();
 
-            if (logic.LevelScore == "One")
-            {
-                query = query.Where(q => q.QuizScore == 3);
-            }
-            else if (logic.LevelScore == "Two")
-            {
-                query = query.Where(q => q.QuizScore == 2.5);
-            }
-            else if (logic.LevelScore == "Three")
-            {
-                query = query.Where(q => q.QuizScore == 2);
-            }
-            else if (logic.LevelScore == "Four")
-            {
-                query = query.Where(q => q.QuizScore == 1.5);
-            }
-            else if (logic.LevelScore == "Five")
-            {
-                query = query.Where(q => q.QuizScore == 1);
-            }
+            // if (logic.LevelScore == "N1")
+            // {
+            //     query = query.Where(q => q.QuizScore == 3);
+            // }
+            // else if (logic.LevelScore == "N2")
+            // {
+            //     query = query.Where(q => q.QuizScore == 2.5);
+            // }
+            // else if (logic.LevelScore == "N3")
+            // {
+            //     query = query.Where(q => q.QuizScore == 2);
+            // }
+            // else if (logic.LevelScore == "N4")
+            // {
+            //     query = query.Where(q => q.QuizScore == 1.5);
+            // }
+            // else if (logic.LevelScore == "N5")
+            // {
+            //     query = query.Where(q => q.QuizScore == 1);
+            // }
             query = query.Take(10);
 
             return await query.ToListAsync();
