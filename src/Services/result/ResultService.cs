@@ -72,7 +72,7 @@ namespace ganbare.src.Services.result
             return _mapper.Map<Result, ResultReadDto>(resultCreated);
         }
         
-            public async Task<List<ResultReadDto>> GetAllAsyncScores()
+            public async Task<List<ResultReadDto>> GetAllAsyncScores() // IMPORTENT
         {
 
             var resultList = await _resultRepo.GetAllAsyncScores();

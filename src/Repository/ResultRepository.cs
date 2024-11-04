@@ -61,7 +61,7 @@ namespace ganbare.src.Repository
         }
 
 
-        public async Task<List<Result>> GetAllAsyncScores()
+        public async Task<List<Result>> GetAllAsyncScores()  // IMPORTENT
         {       // to get the order on the leaderboard 
                 // order by total scores
                 // then by speed

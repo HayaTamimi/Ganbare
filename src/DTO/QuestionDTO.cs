@@ -36,7 +36,7 @@ namespace ganbare.src.DTO
 
             //public QuestionLevel Jlptlevel { get; set; } not important
 
-            public Guid? QuizID { get; set; }
+            public Guid? QuizId { get; set; }
 
             public List<Option> Options { get; set; }
 
@@ -45,15 +45,15 @@ namespace ganbare.src.DTO
 
         public class QuestionUpdateDto
         {
-            [Required, StringLength(50, MinimumLength = 5,
-            ErrorMessage = "Question must be between 5 and 50 characters.")]
-            public string? QuestionText { get; set; }
+            // [Required, StringLength(50, MinimumLength = 5,
+            // ErrorMessage = "Question must be between 5 and 50 characters.")]
+            // public string? QuestionText { get; set; }
 
-            public string? Answer { get; set; }
+            // public string? Answer { get; set; }
 
-           public List<Option> Options { get; set; }
+          // public List<Option> Options { get; set; }
 
-            //public Guid? QuizID { get; set; }
+            public Guid? QuizId { get; set; }
 
         }
     }
