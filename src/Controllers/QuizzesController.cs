@@ -88,11 +88,11 @@ namespace ganbare.src.Controllers
              {
                  return NotFound();
              }
-             return Ok();
+             return Ok(); */
 
 
          [HttpDelete("{id}")]
-         [Authorize(Roles = "Admin")]
+         //[Authorize(Roles = "Admin")]
          public async Task<ActionResult> DeleteOne(Guid id)
          {
              var quizDelete = await _quizService.DeleteOneAsync(id);
@@ -102,6 +102,6 @@ namespace ganbare.src.Controllers
              }
              return NoContent();
          }
- */
+
     }
 }

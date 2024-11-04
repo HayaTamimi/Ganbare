@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ganbare.src.Services.user;
 using Microsoft.AspNetCore.Authorization;
@@ -66,6 +67,36 @@ namespace ganbare.src.Controllers
             }
             return NoContent();
         }
+
+
+
+
+        [HttpPost("create-admin")]
+        public async Task<ActionResult<UserReadDto>> CreateAdminAsync([FromBody] UserCreateDto userCreateDto)
+        {
+            var user = await _userService.CreateAdminAsync(userCreateDto);
+            return Ok(user);
+        }
+
+        [HttpGet("auth")]
+        [Authorize]
+        public async Task<ActionResult<UserReadDto>> CheckAuthAsync()
+        {
+            var authenticatedClaims = HttpContext.User;
+            var userId = authenticatedClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
+            var userGuid = new Guid(userId);
+            var user = await _userService.GetByIdAsync(userGuid);
+            return Ok(user);
+        }
+
+        [Authorize]
+        [HttpPatch("make-admin/{id:guid}")]
+        public async Task<ActionResult<UserReadDto>> UpdateAdminAsync([FromRoute] Guid id)
+        {
+            var user = await _userService.UpdateAdminAsync(id);
+            return Ok(user);
+        }
+
 
         [HttpPost("signUp")]
         public async Task<ActionResult<UserReadDto>> CreateOne([FromBody] UserCreateDto createDto)

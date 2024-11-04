@@ -48,7 +48,27 @@ namespace ganbare.src.Services.quiz
             }
             return _mapper.Map<Quiz, QuizReadDto>(foundQuiz);
         }
-
+        public async Task<bool> DeleteOneAsync(Guid quizId)
+        {
+            var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
+            if (foundQuiz == null)
+            {
+                throw CustomException.NotFound(
+                    $"Quiz with ID {foundQuiz} is not found."
+                );
+            }
+            try
+            {
+                bool isDeleted = await _quizRepo.DeleteOneAsync(foundQuiz);
+                return isDeleted;
+            }
+            catch (Exception ex)
+            {
+                throw CustomException.InternalError(
+                    $"An error occurred while deleting the quiz with ID {quizId}: {ex.Message}"
+                );
+            }
+        }
 
         public async Task<QuizReadDto> GetByLevel(QuizLevel? level)
         {

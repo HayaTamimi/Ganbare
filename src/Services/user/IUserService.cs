@@ -14,6 +14,12 @@ namespace ganbare.src.Services.user
         Task<bool> DeleteOneAsync(Guid id);
         Task<bool> UpdateOneAsync(Guid id, UserUpdateDto updateDto);
         Task<string> SignInAsync(UserSigninDto createDto);
+        Task<UserReadDto> CreateAdminAsync(UserCreateDto createDto);
+        Task<bool> UpdateAdminAsync(Guid id);
+        Task<UserReadDto> FindByEmailAsync(string email);
+        Task<bool> EmailExistsAsync(string email);
+
+
 
     }
 }

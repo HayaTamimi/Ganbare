@@ -83,6 +83,44 @@ namespace ganbare.src.Services.user
             var savedUser = await _userRepo.CreateOneAsync(user);
             return _mapper.Map<User, UserReadDto>(savedUser);
         }
+        public async Task<UserReadDto> CreateAdminAsync(UserCreateDto createDto)
+        {
+            Password.HashPassword(createDto.Password, out string hashedPassword, out byte[] salt);
+            var user = _mapper.Map<UserCreateDto, User>(createDto);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+            //user.Role = Role.Admin;
+            var savedUser = await _userRepo.CreateOneAsync(user);
+            return _mapper.Map<User, UserReadDto>(savedUser);
+        }
+
+        public async Task<bool> UpdateAdminAsync(Guid userId)
+        {
+            var foundUser = await _userRepo.GetByIdAsync(userId);
+            if (foundUser == null)
+            {
+                return false;
+            }
+
+
+            await _userRepo.UpdateOneAsync(foundUser);
+            return true;
+
+        }
+        public async Task<UserReadDto> FindByEmailAsync(string email)
+        {
+            var foundUser = await _userRepo.FindByEmailAsync(email);
+            if (foundUser == null)
+            {
+                throw CustomException.NotFound($"User with {email} is not found");
+            }
+            return _mapper.Map<User, UserReadDto>(foundUser);
+
+        }
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            return await _userRepo.EmailExistsAsync(email);
+        }
 
         //public static bool VerifyPassword(string plainPassword, byte[] salt, string hashedPassword)
 

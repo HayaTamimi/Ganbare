@@ -21,10 +21,20 @@ namespace ganbare.src.Repository
 
         public async Task<User> CreateOneAsync(User newUser)
         {
-            
+
             await _user.AddAsync(newUser);
             await _databaseContext.SaveChangesAsync();
             return newUser;
+        }
+
+        public async Task<User?> FindByEmailAsync(string email)
+        {
+            return await _user.FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            return await _user.AnyAsync(u => u.Email == email);
         }
 
         public async Task<bool> UpdateOneAsync(User updateUser)
@@ -46,10 +56,7 @@ namespace ganbare.src.Repository
         public async Task<List<User>> GetAllAsync()
         {
             return await _user.ToListAsync();
-        }        
-        public async Task<User> FindByEmailAsync(string email)
-        {
-            return await _user.FirstOrDefaultAsync(u => u.Email == email);
-        } 
+        }
+      
     }
 }
