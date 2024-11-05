@@ -44,7 +44,7 @@ namespace ganbare.src.Controllers
             return Ok(user);
         }
 
-        [HttpPut("{id}")]
+        [HttpPatch("{id}")]
        //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, UserUpdateDto updateDto)
         {
@@ -67,8 +67,6 @@ namespace ganbare.src.Controllers
             }
             return NoContent();
         }
-
-
 
 
         [HttpPost("create-admin")]
@@ -108,19 +106,23 @@ namespace ganbare.src.Controllers
 //and you can get the client_id from Google Developer Console
 
         [HttpPost("signIn")]
-        public async Task<ActionResult<string>> SignInUser([FromBody] UserSigninDto createDto)
+        public async Task<ActionResult<string>> SignInUser([FromBody] UserSigninDto userSigninDto)
         {
-            var token = await _userService.SignInAsync(createDto);
-            if (token == "Not Found")
-            {
-                return NotFound();
-            }
-            else if (token == "Unauthorized")
-            {
-                return Unauthorized();
-            }
-            else
-                return Ok(token);
+            // var token = await _userService.SignInAsync(createDto);
+            // // if (token == "Not Found")
+            // // {
+            // //     return NotFound();
+            // // }
+            // // else if (token == "Unauthorized")
+            // // {
+            // //     return Unauthorized();
+            // // }
+            // // else
+            //     return Ok(token);
+
+                   var token = await _userService.SignInAsync(userSigninDto);
+            Console.WriteLine($"token:{token}");
+            return Ok(token);
         }
     }
 

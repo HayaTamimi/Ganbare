@@ -124,16 +124,19 @@ namespace ganbare.src.Services.user
 
         //public static bool VerifyPassword(string plainPassword, byte[] salt, string hashedPassword)
 
-        public async Task<string> SignInAsync(UserSigninDto createDto)
+        public async Task<string> SignInAsync(UserSigninDto userSigninDto)
         {
             bool isMatched = false;
             //var foundUser = await _userRepo.FindByEmailAsync(createDto.Email);
             List<User> userList = await _userRepo.GetAllAsync();
-            var foundUser = userList.FirstOrDefault(u => u.Email == createDto.Email);
+            var foundUser = userList.FirstOrDefault(u => u.Email == userSigninDto.Email);
+            Console.WriteLine($"Founduser {foundUser}!"); // dose not return user
+
             if (foundUser != null)
+            
             {
                 isMatched = Password.VerifyPassword(
-                    createDto.Password,
+                    userSigninDto.Password,
                     foundUser.Salt,
                     foundUser.Password
                 );
@@ -149,7 +152,7 @@ namespace ganbare.src.Services.user
             }
             else
             {
-                throw CustomException.NotFound($"User with email {createDto.Email} not found.");
+                throw CustomException.NotFound($"User with email {userSigninDto.Email} not found.");
             }
         }
     }
