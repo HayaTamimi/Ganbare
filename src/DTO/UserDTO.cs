@@ -52,8 +52,8 @@ namespace ganbare.src.DTO
             ErrorMessage = "Username should be less than 15 letters & more than 2!")]
             public string? Username { get; set; }
             public string? Email { get; set; }
-            public string? Password { get; set; }
-            public byte[]? Salt { get; set; }
+            // public string? Password { get; set; }
+            // public byte[]? Salt { get; set; }
         }
     }
 }
