@@ -25,9 +25,9 @@ namespace ganbare.src.Services.result
 
         }
 
-        public async Task<List<ResultReadDto>> GetAllAsync(Logic logic)
+        public async Task<List<ResultReadDto>> GetAllAsync()
         {
-            var resultList = await _resultRepo.GetAllAsync(logic);
+            var resultList = await _resultRepo.GetAllAsync();
             return _mapper.Map<List<Result>, List<ResultReadDto>>(resultList);
         }
 

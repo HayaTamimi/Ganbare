@@ -11,7 +11,7 @@ namespace ganbare.src.DTO
     {
         public class QuizCreateDto
         {
-    
+
             public QuizLevel Level { get; set; }
 
             //public int? QuizScore { get; set; } // maybe add it later?
@@ -31,11 +31,12 @@ namespace ganbare.src.DTO
 
         }
 
-        /*
-                public class QuizUpdateDto
-                {
-                    // nothing need to be updated
-                    //public Guid QuizId { get; set; }
-                }*/
+
+        public class QuizUpdateDto
+        {
+            public List<Question> Questions { get; set; }
+
+
+        }
     }
 }

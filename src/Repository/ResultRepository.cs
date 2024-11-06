@@ -54,7 +54,7 @@ namespace ganbare.src.Repository
         {
             return await _result.FindAsync(id);
         }
-        public async Task<List<Result>> GetAllAsync(Logic logic)
+        public async Task<List<Result>> GetAllAsync()
         {
 
             return await _result.ToListAsync();

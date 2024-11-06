@@ -31,9 +31,9 @@ namespace ganbare.src.Controllers
             return Ok(resultCreated);
         }
         [HttpGet]
-        public async Task<ActionResult<List<ResultReadDto>>> GetAll(Logic logic)
+        public async Task<ActionResult<List<ResultReadDto>>> GetAll()
         {
-            var resultList = await _resultService.GetAllAsync(logic);
+            var resultList = await _resultService.GetAllAsync();
             return Ok(resultList);
         }
 
