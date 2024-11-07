@@ -40,8 +40,9 @@ namespace ganbare.src.Repository
             return true;
         }
         public async Task<Option?> GetByIdAsync(Guid id)
+        
         {
-            return await _option.FindAsync(id);
+           return await _option.FindAsync(id);
         }
         public async Task<List<Option>> GetAllAsync()
         {

@@ -53,6 +53,7 @@ namespace ganbare.src.Controllers
             }
 
             return Ok(quiz);
+
         }
 
 
@@ -79,29 +80,28 @@ namespace ganbare.src.Controllers
         //     return Ok(quizLevel);
         // }
 
-        /* [HttpPut("{id}")]
-         [Authorize(Roles = "Admin")]
-         public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
-         {
-             var quizUpdatedById = await _quizService.UpdateOneAsync(id, updateDto);
-             if (!quizUpdatedById)
-             {
-                 return NotFound();
-             }
-             return Ok(); */
+        [HttpPut("{id}")]
+        // [Authorize(Roles = "Admin")]
+        public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
+        {
+            var quizUpdatedById = await _quizService.UpdateOneAsync(id, updateDto);
+            if (!quizUpdatedById)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
 
+            [HttpDelete("{id}")]
+            //[Authorize(Roles = "Admin")]
+            public async Task<ActionResult> DeleteOne(Guid id)
+            {
+                var quizDelete = await _quizService.DeleteOneAsync(id);
+                if (!quizDelete)
+                {
+                    return NotFound();
+                }
+                return NoContent();
+            }
 
-         [HttpDelete("{id}")]
-         //[Authorize(Roles = "Admin")]
-         public async Task<ActionResult> DeleteOne(Guid id)
-         {
-             var quizDelete = await _quizService.DeleteOneAsync(id);
-             if (!quizDelete)
-             {
-                 return NotFound();
-             }
-             return NoContent();
-         }
-
-    }
-}
+        } } 

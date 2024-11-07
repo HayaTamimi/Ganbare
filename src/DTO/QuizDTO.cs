@@ -34,9 +34,9 @@ namespace ganbare.src.DTO
 
         public class QuizUpdateDto
         {
-            public List<Question> Questions { get; set; }
+          //  public List<Question> Questions { get; set; }
 
-
+            public QuizLevel Level { get; set; }
         }
     }
 }

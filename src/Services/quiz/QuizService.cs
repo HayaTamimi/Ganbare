@@ -121,7 +121,7 @@ namespace ganbare.src.Services.quiz
                         );
                     }
                 }
-
+ */
                 public async Task<bool> UpdateOneAsync(Guid quizId, QuizUpdateDto updateDto)
                 {
                     var foundQuiz = await _quizRepo.GetByIdAsync(quizId);
@@ -135,6 +135,6 @@ namespace ganbare.src.Services.quiz
                     _mapper.Map(updateDto, foundQuiz);
                     return await _quizRepo.UpdateOneAsync(foundQuiz);
                 }
-                */
+               
     }
 }

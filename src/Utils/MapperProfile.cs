@@ -43,17 +43,17 @@ namespace ganbare.src.Utils
 
             CreateMap<Quiz, QuizReadDto>();
             CreateMap<QuizCreateDto, Quiz>();
-            //CreateMap<QuizUpdateDto, Quiz>()
-            // .ForAllMembers(opts =>
-            //    opts.Condition((src, dest, srcProperty) => srcProperty != null)  );
+            CreateMap<QuizUpdateDto, Quiz>()
+            .ForAllMembers(opts =>
+               opts.Condition((src, dest, srcProperty) => srcProperty != null)  );
 
 
             CreateMap<Result, ResultReadDto>();
             CreateMap<ResultCreateDto, Result>();
-            /*CreateMap<ResultUpdateDto, Result>()
-                .ForAllMembers(opts =>
-                    opts.Condition((src, dest, srcProperty) => srcProperty != null)
-                );*/
+            // CreateMap<ResultUpdateDto, Result>()
+            //     .ForAllMembers(opts =>
+            //         opts.Condition((src, dest, srcProperty) => srcProperty != null)
+            //     );
 
             CreateMap<User, UserReadDto>();
             CreateMap<UserCreateDto, User>();

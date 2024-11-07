@@ -44,9 +44,15 @@ namespace ganbare.src.Repository
         }
         public async Task<Quiz?> GetByIdAsync(Guid id)
         {
-            return await _quiz.FindAsync(id);
+
+            var quiz = await _quiz.Include((p) => p.Questions)
+            .ThenInclude(p => p.Options).FirstOrDefaultAsync((q)=> q.QuizId == id);
+            return quiz;
 
         }
+
+    
+
 
         public async Task<List<Quiz>> GetByLevel(QuizLevel? level)
         {
@@ -108,7 +114,8 @@ namespace ganbare.src.Repository
             // {
             //     query = query.Where(q => q.QuizScore == 1);
             // }
-            query = query.Take(10);
+            query = query.Include(q => q.Questions).
+            Take(10);
 
             return await query.ToListAsync();
         }

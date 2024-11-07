@@ -41,8 +41,12 @@ namespace ganbare.src.Repository
         }
         public async Task<Question?> GetByIdAsync(Guid id)
         {
-            return await _question.FindAsync(id);
+            // return await _question.FindAsync(id);
+
+            var question = await _question.Include((o) => o.Options).FirstOrDefaultAsync(u => u.QuestionId == id);
+            return question;
         }
+        
         public async Task<List<Question>> GetAllAsync()
         {
             var listAsync = await _question.Include(question => question.Options).ToListAsync();
