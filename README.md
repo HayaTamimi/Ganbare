@@ -9,10 +9,9 @@ A Quiz web app to prepare you for JLPT which stands for Japanese Language Profic
   - Sign In
   - User authentication with JWT token
   - User Password is hashed upon registering
-  - Update user info
-  - Delete User
-
-  //  add more later
+  - Admin Dashboard
+  - User Profile 
+  - 
 
 
 ## Technologies Used
@@ -30,10 +29,8 @@ A Quiz web app to prepare you for JLPT which stands for Japanese Language Profic
 - **React Js**: Javascript Framework
 - **Bootstrap**: CSS framework
 - **Axios**: 
-// add more later
 
 ## Prerequisites
-
 - .Net 8 SDK
 - SQL Server
 - VSCode
@@ -43,7 +40,7 @@ A Quiz web app to prepare you for JLPT which stands for Japanese Language Profic
 // add vid 
 
 ## Origin of the Name
-Ganbare （がんばれ）　is a Japanese word that mean "Do Your Best" // add more later
+Ganbare （がんばれ）　is a Japanese word that mean "Do Your Best" and it's a popular word for encouragment.
 
 ## Future Plans
 

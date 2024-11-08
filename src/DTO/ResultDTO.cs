@@ -12,9 +12,10 @@ namespace ganbare.src.DTO
         public class ResultCreateDto
         {
             public double? TotalScore { get; set; }
+            public DateTime? CreatedAt { get; private set; } = DateTime.UtcNow;// can't be edited
 
             public double? Speed { get; set; }
-            public Quiz? Quiz { get; set; } // *NEW* need to add to ERD
+            public Quiz? Quiz { get; set; } 
 
             public Guid? UserId { get; set; }
 
@@ -23,7 +24,8 @@ namespace ganbare.src.DTO
         {
             public Guid ResultId { get; set; }
             public double? TotalScore { get; set; }
-             public List<Quiz> Quizzes { get; set; }
+            public List<Quiz> Quizzes { get; set; }
+            public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;// can't be edited
 
             public double? Speed { get; set; }
 
@@ -32,11 +34,11 @@ namespace ganbare.src.DTO
 
         }
 
-      /*  public class ResultUpdateDto
-        {
+          public class ResultUpdateDto
+          {
 
-            // nothing need to be updated
+              // nothing need to be updated
 
-        }*/
+          }
     }
 }
