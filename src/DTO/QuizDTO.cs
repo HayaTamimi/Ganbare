@@ -14,7 +14,7 @@ namespace ganbare.src.DTO
 
             public QuizLevel Level { get; set; }
 
-            //public int? QuizScore { get; set; } // maybe add it later?
+            public int? QuizScore { get; set; } 
 
             // public Result Result { get; set; } // maybe add it later?
 
@@ -27,6 +27,8 @@ namespace ganbare.src.DTO
             public List<Question> Questions { get; set; }
             public QuizLevel Level { get; set; }
             public Guid? UserId { get; set; }
+            public User User { get; set; }  
+
             public Guid? ResultId { get; set; }
 
         }
@@ -37,6 +39,7 @@ namespace ganbare.src.DTO
           //  public List<Question> Questions { get; set; }
 
             public QuizLevel Level { get; set; }
+            public User User { get; set; }
         }
     }
 }

@@ -56,32 +56,17 @@ namespace ganbare.src.Repository
         }
         public async Task<List<Result>> GetAllAsync()
         {
-
-            return await _result.ToListAsync();
-        }
-
-
-        public async Task<List<Result>> GetAllAsyncScores()  // IMPORTENT
-        {       // to get the order on the leaderboard 
-                // order by total scores
-                // then by speed
-                // var userResults = await _result.GroupBy(r => r.UserId)
-                // .Select(Group => new
-                //  {
-                //      UserId = Group.Key,
-                //      TotalScore = Group.Sum(result => result.TotalScore),
-                //       Speed = Group.Quiz.TimeTaken
-                //    })
-                //      .OrderBy(r => r.TotalScore)
-                //      .ThenBy(r => r.Speed)
-                //       .ToListAsync();
-            var userResults = await _result.Include((p) => p.Quizzes).ToListAsync();
+            var userResults = await _result.Include((p) => p.Quizzes)
+            .ThenInclude(p => p.User).ToListAsync();
             return userResults;
         }
 
 
-        //var results = await _resultRepo.GetAllAsyncScores();
-        // var resultMap = _mapper.Map<List<Result>, List<ResultReadDto>>(results);
-        //return resultMap;
+        public async Task<List<Result>> GetAllAsyncScores()  // IMPORTENT
+        {
+            var userResults = await _result.Include((p) => p.Quizzes).ThenInclude(p => p.User).ToListAsync();
+            return userResults;
+        }
+
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using static ganbare.src.DTO.LeaderboardDTO;
 
 namespace ganbare.src.Controllers
-{ 
+{
     [ApiController]
     [Route("api/v1/[controller]")]
     public class LeaderboardsController : ControllerBase
@@ -26,6 +26,7 @@ namespace ganbare.src.Controllers
         {
             var leaderboardCreated = await _leaderboardService.CreateOneAsync(createDto);
             return Ok(leaderboardCreated);
+   
         }
 
         [HttpGet]
@@ -36,7 +37,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-         //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult<LeaderboardReadDto>> GetById([FromRoute] Guid id)
         {
             var leaderboard = await _leaderboardService.GetByIdAsync(id);
@@ -50,7 +51,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpPut("{id}")]
-         //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, LeaderboardUpdateDto updateDto)
         {
             var leaderboardUpdatedById = await _leaderboardService.UpdateOneAsync(id, updateDto);
@@ -62,7 +63,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpDelete("{id}")]
-         //[Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var leaderboardDelete = await _leaderboardService.DeleteOneAsync(id);

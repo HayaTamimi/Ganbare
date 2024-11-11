@@ -16,12 +16,15 @@ namespace ganbare.src.Entity
 
         public float? TimeTaken { get; set; }
 
+
         public QuizLevel Level { get; set; }
 
         [Required]
         public List<Question> Questions { get; set; }
 
         public Guid? UserId { get; set; }  
+
+        public User User { get; set; }  
 
         public Guid? ResultId { get; set; } 
 

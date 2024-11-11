@@ -21,11 +21,12 @@ namespace ganbare.src.Repository
 
         public async Task<Leaderboard> CreateOneAsync(Leaderboard newLeaderboard)
         {
-            
+
             await _leaderboard.AddAsync(newLeaderboard);
             await _databaseContext.SaveChangesAsync();
             return newLeaderboard;
         }
+        
 
         public async Task<bool> UpdateOneAsync(Leaderboard updateLeaderboard)
         {
@@ -46,7 +47,7 @@ namespace ganbare.src.Repository
         public async Task<List<Leaderboard>> GetAllAsync()
         {
             return await _leaderboard.ToListAsync();
-        }        
-    
+        }
+
     }
 }

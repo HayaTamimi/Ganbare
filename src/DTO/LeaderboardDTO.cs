@@ -11,7 +11,6 @@ namespace ganbare.src.DTO
     {
         public class LeaderboardCreateDto
         {
-        public Guid LeaderboardId { get; set; }
 
         }
         public class LeaderboardReadDto

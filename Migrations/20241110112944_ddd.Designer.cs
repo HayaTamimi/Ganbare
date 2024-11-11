@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ganbare.src.Database;
@@ -12,9 +13,11 @@ using ganbare.src.Entity;
 namespace ganbare.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241110112944_ddd")]
+    partial class ddd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,8 +139,6 @@ namespace ganbare.Migrations
 
                     b.HasIndex("LeaderboardId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Results");
                 });
 
@@ -197,11 +198,9 @@ namespace ganbare.Migrations
                         .WithMany("Quizzes")
                         .HasForeignKey("ResultId");
 
-                    b.HasOne("ganbare.src.Entity.User", "User")
+                    b.HasOne("ganbare.src.Entity.User", null)
                         .WithMany("Quizzes")
                         .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ganbare.src.Entity.Result", b =>
@@ -211,12 +210,6 @@ namespace ganbare.Migrations
                         .HasForeignKey("LeaderboardId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("ganbare.src.Entity.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ganbare.src.Entity.Leaderboard", b =>

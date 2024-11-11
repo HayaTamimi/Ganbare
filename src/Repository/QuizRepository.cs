@@ -48,10 +48,8 @@ namespace ganbare.src.Repository
             var quiz = await _quiz.Include((p) => p.Questions)
             .ThenInclude(p => p.Options).FirstOrDefaultAsync((q)=> q.QuizId == id);
             return quiz;
-
         }
 
-    
 
 
         public async Task<List<Quiz>> GetByLevel(QuizLevel? level)

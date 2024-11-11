@@ -10,5 +10,6 @@ namespace ganbare.src.Entity
     {
         public Guid LeaderboardId { get; set; }
         public List<Result> Results { get; set; }
+
     }
 }

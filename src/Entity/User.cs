@@ -15,7 +15,8 @@ namespace ganbare.src.Entity
 
         [StringLength(14, MinimumLength = 3,
         ErrorMessage = "Username should be less than 15 letters & more than 2!"), Required]
-        public string Username { get; set; }
+        public required string Username { get; set; }
+
         [EmailAddress, Required]
         public string Email { get; set; }
 

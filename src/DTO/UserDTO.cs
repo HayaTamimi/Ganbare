@@ -11,15 +11,14 @@ namespace ganbare.src.DTO
     {
         public class UserCreateDto
         {
-            [StringLength(14, MinimumLength = 3, 
+            [StringLength(14, MinimumLength = 3,
             ErrorMessage = "Username should be less than 15 letters & more than 2!")]
-
-            public string Username { get; set; }
+            public required string Username { get; set; }
 
             [EmailAddress, Required]
             public string Email { get; set; }
-            
-            public Role Role { get; set; } = Role.Customer; 
+
+            public Role Role { get; set; } = Role.Customer;
 
 
             [DataType(DataType.Password), Required]
@@ -41,17 +40,17 @@ namespace ganbare.src.DTO
         public class UserReadDto
         {
             public Guid UserId { get; set; }
-            public string Username { get; set; }
+            public required string Username { get; set; }
             public string Email { get; set; }
-             public Role Role { get; set; }
+            public Role Role { get; set; }
 
         }
 
         public class UserUpdateDto
         {
-            [StringLength(14, MinimumLength = 3, 
+            [StringLength(14, MinimumLength = 3,
             ErrorMessage = "Username should be less than 15 letters & more than 2!")]
-            public string? Username { get; set; }
+            public required string Username { get; set; }
             public string? Email { get; set; }
             // public string? Password { get; set; }
             // public byte[]? Salt { get; set; }

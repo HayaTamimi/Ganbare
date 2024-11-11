@@ -71,35 +71,35 @@ namespace ganbare.src.Services.result
 
             return _mapper.Map<Result, ResultReadDto>(resultCreated);
         }
-        
-            public async Task<List<ResultReadDto>> GetAllAsyncScores() // IMPORTENT
+
+        public async Task<List<ResultReadDto>> GetAllAsyncScores() // IMPORTENT
         {
 
             var resultList = await _resultRepo.GetAllAsyncScores();
             var resultScores = _mapper.Map<List<Result>, List<ResultReadDto>>(resultList);
 
 
-            resultScores[0].TotalScore = resultScores[0].Quizzes.Sum (r => r.QuizScore);
+            resultScores[0].TotalScore = resultScores[0].Quizzes.Sum(r => r.QuizScore);
 
 
-           // resultScores[0].TotalScore = 100;
+            // resultScores[0].TotalScore = 100;
 
             return resultScores;
-       
-        }
-        /*
-                                public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)
-                                {
-                                    var foundResult = await _resultRepo.GetByIdAsync(resultId);
 
-                                    if (foundResult == null)
-                                    {
-                                        throw CustomException.NotFound(
-                                            $"Result with ID {resultId} cannot be found for updating."
-                                        );
-                                    }
-                                    _mapper.Map(updateDto, foundResult);
-                                    return await _resultRepo.UpdateOneAsync(foundResult);
-                                }*/
+        }
+
+        public async Task<bool> UpdateOneAsync(Guid resultId, ResultUpdateDto updateDto)
+        {
+            var foundResult = await _resultRepo.GetByIdAsync(resultId);
+
+            if (foundResult == null)
+            {
+                throw CustomException.NotFound(
+                    $"Result with ID {resultId} cannot be found for updating."
+                );
+            }
+            _mapper.Map(updateDto, foundResult);
+            return await _resultRepo.UpdateOneAsync(foundResult);
+        }
     }
 }
