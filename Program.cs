@@ -68,7 +68,7 @@ builder.Services.AddCors(options =>
                       policy =>
                       {
                           policy.WithOrigins("http://localhost:5171"
-                         // , "http://deployemntkink"
+                         , "https://ganbare-jlpt.onrender.com"
                           )
                           .AllowAnyHeader()
                             .AllowAnyMethod()
