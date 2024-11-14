@@ -23,7 +23,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet]
-      //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<List<UserReadDto>>> GetAll()
         {
             var userList = await _userService.GetAllAsync();
@@ -31,7 +31,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-       //  [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<UserReadDto>> GetById([FromRoute] Guid id)
         {
             var user = await _userService.GetByIdAsync(id);
@@ -45,7 +45,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpPatch("{id}")]
-       //  [Authorize(Roles = "Admin")]
+         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, UserUpdateDto updateDto)
         {
             var userUpdatedById = await _userService.UpdateOneAsync(id, updateDto);
@@ -57,7 +57,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpDelete("{id}")]
-    //    [Authorize(Roles = "Admin")]
+      [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var userDelete = await _userService.DeleteOneAsync(id);

@@ -21,7 +21,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpPost]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<LeaderboardReadDto>> CreateOne([FromBody] LeaderboardCreateDto createDto)
         {
             var leaderboardCreated = await _leaderboardService.CreateOneAsync(createDto);
@@ -37,7 +37,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<LeaderboardReadDto>> GetById([FromRoute] Guid id)
         {
             var leaderboard = await _leaderboardService.GetByIdAsync(id);
@@ -51,7 +51,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, LeaderboardUpdateDto updateDto)
         {
             var leaderboardUpdatedById = await _leaderboardService.UpdateOneAsync(id, updateDto);
@@ -63,7 +63,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var leaderboardDelete = await _leaderboardService.DeleteOneAsync(id);

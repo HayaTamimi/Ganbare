@@ -26,7 +26,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpPost]
-        //  [Authorize(Roles = "Admin")]
+         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<QuizReadDto>> CreateOne([FromBody] QuizCreateDto createDto)
         {
             var quizCreated = await _quizService.CreateOneAsync(createDto);
@@ -42,7 +42,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<QuizReadDto>> GetById([FromRoute] Guid id)
         {
             var quiz = await _quizService.GetByIdAsync(id);
@@ -71,7 +71,7 @@ namespace ganbare.src.Controllers
             return Ok(quizLevel);
         }
 
-        // [HttpGet("quizzes/{level}")] // GET => /quizzes?level=n5 
+        [HttpGet("quizzes/{level}")] // GET => /quizzes?level=n5 
         // public async Task<ActionResult<List<QuizReadDto>> GetAllQuestionsByLevel(QuizLevel? level)
         // {
 
@@ -81,7 +81,7 @@ namespace ganbare.src.Controllers
         // }
 
         [HttpPut("{id}")]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, QuizUpdateDto updateDto)
         {
             var quizUpdatedById = await _quizService.UpdateOneAsync(id, updateDto);
@@ -93,7 +93,7 @@ namespace ganbare.src.Controllers
         }
 
             [HttpDelete("{id}")]
-            //[Authorize(Roles = "Admin")]
+           [Authorize(Roles = "Admin")]
             public async Task<ActionResult> DeleteOne(Guid id)
             {
                 var quizDelete = await _quizService.DeleteOneAsync(id);
