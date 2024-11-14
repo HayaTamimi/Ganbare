@@ -24,7 +24,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpPost]
-          [Authorize(Roles = "Admin")]
+         // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResultReadDto>> CreateOne([FromBody] ResultCreateDto createDto)
         {
             var resultCreated = await _resultService.CreateOneAsync(createDto);
@@ -38,7 +38,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpGet("{id}")]
-      [Authorize(Roles = "Admin")]
+     // [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ResultReadDto>> GetById([FromRoute] Guid id)
         {
             var result = await _resultService.GetByIdAsync(id);
@@ -53,7 +53,7 @@ namespace ganbare.src.Controllers
 
 
         [HttpDelete("{id}")]
-       [Authorize(Roles = "Admin")]
+       //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> DeleteOne(Guid id)
         {
             var resultDelete = await _resultService.DeleteOneAsync(id);
@@ -65,7 +65,7 @@ namespace ganbare.src.Controllers
         }
         //api/v1/results/scores
         [HttpGet("scores")]
-         [Authorize(Roles = "Admin")]
+       //  [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllAsyncScores()
         {
             var resultReadDtos = await _resultService.GetAllAsyncScores();
@@ -73,7 +73,7 @@ namespace ganbare.src.Controllers
         }
 
         [HttpPut("{id}")]
-         [Authorize(Roles = "Admin")]
+       //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult> UpdateOne(Guid id, ResultUpdateDto updateDto)
         {
             var resultUpdatedById = await _resultService.UpdateOneAsync(id, updateDto);
